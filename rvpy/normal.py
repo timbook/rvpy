@@ -5,6 +5,7 @@ class Normal:
     def __init__(self, mu=0, sigma=1):
         assert isinstance(mu, (int, float)), "mu must be numeric!"
         assert isinstance(sigma, (int, float)), "sigma must be numeric!"
+        assert sigma > 0, "sigma must be positive"
         # Parameters
         self.mu = mu
         self.sigma = sigma
@@ -15,6 +16,11 @@ class Normal:
         self.var = sigma**2
         self.skew = 0
         self.kurtosis = 0
+
+        # Other properties
+        self.median = mu
+        self.mode = mu
+        # self.entroy = _
 
         # Scipy backend
         self.sp = norm(mu, sigma)
