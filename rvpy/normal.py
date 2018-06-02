@@ -3,6 +3,8 @@ from scipy.stats import norm
 
 class Normal:
     def __init__(self, mu=0, sigma=1):
+        assert isinstance(mu, (int, float)), "mu must be numeric!"
+        assert isinstance(sigma, (int, float)), "sigma must be numeric!"
         # Parameters
         self.mu = mu
         self.sigma = sigma
@@ -22,6 +24,8 @@ class Normal:
 
     def __add__(self, Y):
         if isinstance(Y, Normal):
+            new_mu = Y.mu
+            new_sigma = (self.var + Y.var)**0.5
             return Normal(new_mu, new_sigma)
         elif isinstance(Y, (int, float)):
             return Normal(self.mu + Y, self.sigma)
@@ -29,13 +33,11 @@ class Normal:
             raise TypeError("Only addition by another (independent) Normal, int, or float supported.")
 
     def __radd__(self, c):
-        if isinstance(c, (int, float)):
-            return self + c
+        return self.__add__(c)
 
     def __mul__(self, c):
         if isinstance(c, (int, float)):
-            self.mu *= c
-            self.sigma *= c
+            return Normal(c*self.mu, c*self.sigma)
         else:
             raise TypeError("Only multiplicated by int or float supported.")
 
@@ -43,7 +45,7 @@ class Normal:
         return self.__mul__(c)
 
     def __truediv__(self, c):
-        if c != 0:
+        if isinstance(c, (int, float)) and c != 0:
             return self.__mul__(1 / c)
         else:
             raise ZeroDivisionError("Cannot divide a Normal by zero!")
