@@ -34,11 +34,14 @@ class Normal:
         if isinstance(c, (int, float)):
             return self + c
 
-    def __mult__(self, c):
+    def __mul__(self, c):
         if isinstance(c, (int, float)):
             return Normal(self.mu, c * self.sigma)
         else:
             raise TypeError
+
+    def __rmul__(self, c):
+        return self.__mul__(c)
 
     def sample(self, *shape):
         return np.random.randn(*shape)
