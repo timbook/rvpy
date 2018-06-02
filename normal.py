@@ -36,7 +36,7 @@ class Normal:
 
     def __mul__(self, c):
         if isinstance(c, (int, float)):
-            return Normal(self.mu, c * self.sigma)
+            return Normal(c * self.mu, c * self.sigma)
         else:
             raise TypeError
 
@@ -57,3 +57,10 @@ class Normal:
 
     def prob_interval(self, a, b):
         return self.cdf(b) - self.cdf(a)
+
+    # TODOs:
+    # - __iadd__, __imul__, __truediv__, ...
+    # __or__ for Bayes priors?
+    # __pow__(self, 2) --> ChiSq()
+    # __truediv__ --> Cauchy()
+    # Remove scipy dependency
