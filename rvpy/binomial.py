@@ -35,12 +35,14 @@ class Binomial:
     def pdf(self, k):
         assert k >= 0 and k <= self.n, "k must be between 0 and n"
         assert isinstance(k, int), "k must be an integer"
+        # TODO: Return numpy objects.
         f = np.math.factorial
         coef = f(self.n) / (f(k) * f(self.n - k))
         return coef * (self.p**k) * (self.q)**(self.n - k)
 
     def cdf(self, k):
         assert isinstance(k, int), "k must be an integer"
+        # TODO: Return numpy objects.
         if k < 0:
             return 0
         elif k <= self.n:
