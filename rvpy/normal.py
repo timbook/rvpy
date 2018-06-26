@@ -23,36 +23,42 @@ class Normal(distribution.Distribution):
     def __repr__(self):
         return f"Normal(mu={self.mu}, sigma={self.sigma})"
 
-    def __add__(self, Y):
-        if isinstance(Y, Normal):
-            new_mu = Y.mu
-            new_sigma = (self.var + Y.var)**0.5
+    def __add__(self, other):
+        if isinstance(other, Normal):
+            new_mu = other.mu
+            new_sigma = (self.var + other.var)**0.5
             return Normal(new_mu, new_sigma)
-        elif isinstance(Y, (int, float)):
-            return Normal(self.mu + Y, self.sigma)
+        elif isinstance(other, (int, float)):
+            return Normal(self.mu + other, self.sigma)
         else:
             raise TypeError("Only addition by another (independent) Normal, int, or float supported.")
 
-    def __radd__(self, c):
-        return self.__add__(c)
+    def __radd__(self, other):
+        return self.__add__(other)
 
-    def __mul__(self, c):
-        if isinstance(c, (int, float)):
-            return Normal(c*self.mu, c*self.sigma)
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            return Normal(other*self.mu, other*self.sigma)
         else:
             raise TypeError("Only multiplicated by int or float supported.")
 
-    def __rmul__(self, c):
-        return self.__mul__(c)
+    def __rmul__(self, other):
+        return self.__mul__(other)
 
-    def __truediv__(self, c):
-        if isinstance(c, (int, float)) and c != 0:
-            return self.__mul__(1 / c)
+    def __truediv__(self, other):
+        if isinstance(other, (int, float)) and other != 0:
+            return self.__mul__(1 / other)
         else:
             raise ZeroDivisionError("Cannot divide a Normal by zero!")
 
     def __neg__(self):
         return Normal(-self.mu, self.sigma)
+
+    def __sub__(self, other):
+        return self + (-other)
+
+    def __rsub__(self, other):
+        return other + (-self)
 
     def mgf(self, t):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
