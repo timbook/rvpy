@@ -6,6 +6,9 @@ class Binomial(distribution.Distribution):
         assert p < 1 and p > 0, "p must be a float between 0 and 1"
         assert isinstance(p, float), "p must be a float"
         assert isinstance(n, int), "n must be an integer"
+
+        super().__init__()
+
         # Parameters
         q = 1 - p
         self.p = p

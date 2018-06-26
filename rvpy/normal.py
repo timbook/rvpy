@@ -8,6 +8,8 @@ class Normal(distribution.Distribution):
         assert isinstance(sigma, (int, float)), "sigma must be numeric!"
         assert sigma > 0, "sigma must be positive"
 
+        super().__init__()
+
         # Parameters
         self.mu = mu
         self.sigma = sigma
@@ -66,12 +68,6 @@ class Normal(distribution.Distribution):
 
     def mgf(self, t):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
-
-    def pdf(self, x):
-        return self.sp.pdf(x)
-
-    def cdf(self, x):
-        return self.sp.cdf(x)
 
     def prob_interval(self, a, b):
         return self.cdf(b) - self.cdf(a)
