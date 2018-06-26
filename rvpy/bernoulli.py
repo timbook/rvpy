@@ -1,6 +1,6 @@
-from binomial import Binomial
+from . import binomial
 
-class Bernoulli(Binomial):
+class Bernoulli(binomial.Binomial):
     def __init__(self, p):
         super().__init__(n=1, p=p)
 

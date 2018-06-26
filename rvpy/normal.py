@@ -1,7 +1,8 @@
 import numpy as np
 from scipy.stats import norm
+from . import distribution
 
-class Normal:
+class Normal(distribution.Distribution):
     def __init__(self, mu=0, sigma=1):
         assert isinstance(mu, (int, float)), "mu must be numeric!"
         assert isinstance(sigma, (int, float)), "sigma must be numeric!"
@@ -99,8 +100,8 @@ class StandardNormal(Normal):
     def __repr__(self):
         return f"StandardNormal(mu=0, sigma=1)"
 
-    def to_nonstandard(self, mu, sigma):
-        return Normal(mu=mu, sigma=sigma)
+    def to_nonstandard(self):
+        return Normal(mu=0, sigma=1)
 
     # TODO: __pow__(self, 2) --> ChiSq()
 

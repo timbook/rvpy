@@ -1,6 +1,6 @@
 import numpy as np
 
-class CUniform:
+class CUniform(Distribution):
     def __init__(self, a=0, b=1):
         # Parameters
         self.a = a
