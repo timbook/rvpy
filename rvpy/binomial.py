@@ -34,9 +34,6 @@ class Binomial(distribution.Distribution):
         assert self.p == Y.p, "values of p must match in order to add"
         return Binomial(self.n + Y.n, self.p)
 
-    def sample(self, *shape):
-        return np.random.binomial(n=self.n, p=self.p, size=shape)
-
     def pmf(self, k):
         assert k >= 0 and k <= self.n, "k must be between 0 and n"
         assert isinstance(k, int), "k must be an integer"

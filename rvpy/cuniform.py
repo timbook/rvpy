@@ -36,16 +36,6 @@ class CUniform(Distribution):
     def __rmul__(self, c):
         return self.__mul__(c)
 
-    def sample(self, *shape):
-        return (self.b - self.a) * np.random.rand(*shape) + self.a
-
-    def pdf(self, x):
-        return np.where((x >= self.a) & (x <= self.b), 1 / (self.b - self.a), 0)
-
-    def cdf(self, x):
-        above_a = (x >= self.a) * 1
-        return np.where(x < self.b, (x-self.a) / (self.b-self.a), 1) * above_a
-
     def mgf(self, t):
         # TODO: Why is t = 0 throwing a warning?
         def mgf_not_0(t):

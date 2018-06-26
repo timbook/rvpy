@@ -15,7 +15,7 @@ class Distribution:
         try:
             return self.sp.pmf(x)
         except AttributeError:
-            print("This random variable has no pdf method!")
+            print("This random variable has no pmf method!")
 
     def cdf(self, x):
         try:
@@ -23,3 +23,15 @@ class Distribution:
         except AttributeError:
             print("This random variable has no pdf method!")
 
+    def quantile(self, x):
+        try:
+            return self.sp.ppf(x)
+        except AttributeError:
+            print("This random variable has no quantile method!")
+
+    def sample(self, *shape):
+        try:
+            return self.sp.rvs(size=shape)
+        except AttributeError:
+            print("Cannot sample fromthis distribution!")
+        

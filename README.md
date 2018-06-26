@@ -7,5 +7,4 @@ _Details coming soon..._
 * Properly handle exceptions.
 * Implement unit tests.
 * setup.py
-* `quantile()` methods
 * `fit()` methods for each RV (`"MLE"`, `"MOM"`)

@@ -63,17 +63,8 @@ class Normal(distribution.Distribution):
     def __neg__(self):
         return Normal(-self.mu, self.sigma)
 
-    def sample(self, *shape):
-        return np.random.randn(*shape)
-
     def mgf(self, t):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
-
-    def pdf(self, x):
-        return self.sp.pdf(x)
-
-    def cdf(self, x):
-        return self.sp.cdf(x)
 
     def prob_interval(self, a, b):
         return self.cdf(b) - self.cdf(a)
