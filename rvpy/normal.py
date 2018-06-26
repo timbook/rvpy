@@ -63,8 +63,6 @@ class Normal(distribution.Distribution):
     def mgf(self, t):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
 
-    def prob_interval(self, a, b):
-        return self.cdf(b) - self.cdf(a)
 
     def to_standard(self):
         if self.mu == 0 and self.sigma == 1:
