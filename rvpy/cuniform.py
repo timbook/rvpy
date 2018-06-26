@@ -1,8 +1,12 @@
 import numpy as np
+from scipy.stats import uniform
+from . import distribution
 
-class CUniform(Distribution):
+class CUniform(distribution.Distribution):
     def __init__(self, a=0, b=1):
         assert b > a, "b must be larger than a"
+
+        super().__init__()
 
         # Parameters
         self.a = a
@@ -14,6 +18,9 @@ class CUniform(Distribution):
         self.std = self.var**0.5
         self.skew = 0
         self.kurtosis = -6/5
+
+        # Scipy backend
+        self.sp = uniform(a, b - a)
 
     def __repr__(self):
         return f"CUniform(a={self.a}, b={self.b})"
