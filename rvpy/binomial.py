@@ -31,15 +31,6 @@ class Binomial(distribution.Distribution):
         assert self.p == Y.p, "values of p must match in order to add"
         return Binomial(self.n + Y.n, self.p)
 
-    def pmf(self, k):
-        assert k >= 0 and k <= self.n, "k must be between 0 and n"
-        assert isinstance(k, int), "k must be an integer"
-        return self.sp.pmf(k)
-
-    def cdf(self, k):
-        assert isinstance(k, int), "k must be an integer"
-        return self.sp.cdf(k)
-
     def mgf(self, t):
         return (self.q + self.p * np.exp(t))**self.n
 
