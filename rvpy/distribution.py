@@ -18,32 +18,20 @@ class Distribution:
         return self
 
     def pdf(self, x):
-        try:
-            return self.sp.pdf(x)
-        except AttributeError:
-            print("This random variable has no pdf method!")
+        return self.sp.pdf(x)
 
     def pmf(self, x):
-        try:
-            return self.sp.pmf(x)
-        except AttributeError:
-            print("This random variable has no pmf method!")
+        return self.sp.pmf(x)
 
     def cdf(self, x):
-        try:
-            return self.sp.cdf(x)
-        except AttributeError:
-            print("This random variable has no pdf method!")
+        return self.sp.cdf(x)
+
+    def prob_interval(self, a, b):
+        return self.cdf(b) - self.cdf(a)
 
     def quantile(self, x):
-        try:
-            return self.sp.ppf(x)
-        except AttributeError:
-            print("This random variable has no quantile method!")
+        return self.sp.ppf(x)
 
     def sample(self, *shape):
-        try:
-            return self.sp.rvs(size=shape)
-        except AttributeError:
-            print("Cannot sample fromthis distribution!")
+        return self.sp.rvs(size=shape)
         
