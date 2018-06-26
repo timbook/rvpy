@@ -2,6 +2,18 @@ class Distribution:
     def __init__(self):
         pass
 
+    def _moments(self):
+        m, v, s, k = self.sp.stats(moments = 'mvsk')
+        self.mean = float(m)
+        self.var = float(v)
+        self.std = v**0.5
+        self.skew = float(s)
+        self.kurtosis = float(k)
+
+        self.median = float(self.sp.median())
+        self.entropy = float(self.sp.entropy())
+    
+
     def __pos__(self):
         return self
 

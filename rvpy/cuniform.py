@@ -6,21 +6,18 @@ class CUniform(distribution.Distribution):
     def __init__(self, a=0, b=1):
         assert b > a, "b must be larger than a"
 
-        super().__init__()
-
         # Parameters
         self.a = a
         self.b = b
 
-        # Moments
-        self.mean = (a + b) / 2
-        self.var = (b - a)**2 / 12
-        self.std = self.var**0.5
-        self.skew = 0
-        self.kurtosis = -6/5
-
         # Scipy backend
         self.sp = uniform(a, b - a)
+
+        # Intialize super - does nothing yet.
+        super().__init__()
+
+        # Get moments
+        super()._moments()
 
     def __repr__(self):
         return f"CUniform(a={self.a}, b={self.b})"

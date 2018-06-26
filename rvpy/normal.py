@@ -8,26 +8,17 @@ class Normal(distribution.Distribution):
         assert isinstance(sigma, (int, float)), "sigma must be numeric!"
         assert sigma > 0, "sigma must be positive"
 
-        super().__init__()
-
-        # Parameters
         self.mu = mu
         self.sigma = sigma
-        
-        # Moments
-        self.mean = mu
-        self.std = sigma
-        self.var = sigma**2
-        self.skew = 0
-        self.kurtosis = 0
-
-        # Other properties
-        self.median = mu
-        self.mode = mu
-        # self.entroy = _
 
         # Scipy backend
         self.sp = norm(mu, sigma)
+
+        # Intialize super - does nothing yet.
+        super().__init__()
+
+        # Get moments
+        super()._moments()
 
     def __repr__(self):
         return f"Normal(mu={self.mu}, sigma={self.sigma})"

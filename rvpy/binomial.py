@@ -8,23 +8,20 @@ class Binomial(distribution.Distribution):
         assert isinstance(p, float), "p must be a float"
         assert isinstance(n, int), "n must be an integer"
 
-        super().__init__()
-
         # Parameters
         q = 1 - p
         self.p = p
         self.q = q
         self.n = n
 
-        # Moments
-        self.mean = n*p
-        self.std = (n*p*q)**0.5
-        self.var = n*p*q
-        self.skew = (1 - 2*p) / np.sqrt(n*p*q)
-        self.kurtosis = (1 - 6*p*q) / (n*p*q) 
-
         # Scipy backend
         self.sp = binom(n, p)
+
+        # Intialize super - does nothing yet.
+        super().__init__()
+
+        # Get moments
+        super()._moments()
 
     def __repr__(self):
         return f"Binomial(n={self.n}, p={self.p})"
