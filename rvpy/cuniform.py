@@ -2,6 +2,8 @@ import numpy as np
 
 class CUniform(Distribution):
     def __init__(self, a=0, b=1):
+        assert b > a, "b must be larger than a"
+
         # Parameters
         self.a = a
         self.b = b
@@ -15,6 +17,24 @@ class CUniform(Distribution):
 
     def __repr__(self):
         return f"CUniform(a={self.a}, b={self.b})"
+
+    def __add__(self, c):
+        if isinstance(c, (int, float)):
+            return CUniform(self.a + c, self.b + c)
+        else:
+            raise TypeError("Only scalar addition for CUniforms is supported.")
+
+    def __radd__(self, c):
+        return self.__add__(c)
+
+    def __mul__(self, c):
+        if isinstance(c, (int, float)):
+            return CUniform(self.a * c, self.b * c)
+        else:
+            raise TypeError("Only scalar multiplication for CUniforms is supported.")
+
+    def __rmul__(self, c):
+        return self.__mul__(c)
 
     def sample(self, *shape):
         return (self.b - self.a) * np.random.rand(*shape) + self.a

@@ -1,5 +1,6 @@
 import numpy as np
-from . import distribution
+from scipy.stats import binom
+from . import distribution, bernoulli
 
 class Binomial(distribution.Distribution):
     def __init__(self, n, p):
@@ -22,6 +23,9 @@ class Binomial(distribution.Distribution):
         self.skew = (1 - 2*p) / np.sqrt(n*p*q)
         self.kurtosis = (1 - 6*p*q) / (n*p*q) 
 
+        # Scipy backend
+        self.sp = binom(n, p)
+
     def __repr__(self):
         return f"Binomial(n={self.n}, p={self.p})"
 
@@ -33,23 +37,18 @@ class Binomial(distribution.Distribution):
     def sample(self, *shape):
         return np.random.binomial(n=self.n, p=self.p, size=shape)
 
-    def pdf(self, k):
+    def pmf(self, k):
         assert k >= 0 and k <= self.n, "k must be between 0 and n"
         assert isinstance(k, int), "k must be an integer"
-        # TODO: Return numpy objects.
-        f = np.math.factorial
-        coef = f(self.n) / (f(k) * f(self.n - k))
-        return coef * (self.p**k) * (self.q)**(self.n - k)
+        return self.sp.pmf(k)
 
     def cdf(self, k):
         assert isinstance(k, int), "k must be an integer"
-        # TODO: Return numpy objects.
-        if k < 0:
-            return 0
-        elif k <= self.n:
-            return sum(self.pdf(i) for i in range(k + 1))
-        else:
-            return 1
+        return self.sp.cdf(k)
 
     def mgf(self, t):
         return (self.q + self.p * np.exp(t))**self.n
+
+    def to_bernoulli(self):
+        assert self.n == 1, "Must have n == 1 to convert to downcast to Bernoulli"
+        return bernoulli.Bernoulli(self.p)

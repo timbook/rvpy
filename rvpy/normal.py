@@ -69,6 +69,12 @@ class Normal(distribution.Distribution):
     def mgf(self, t):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
 
+    def pdf(self, x):
+        return self.sp.pdf(x)
+
+    def cdf(self, x):
+        return self.sp.cdf(x)
+
     def prob_interval(self, a, b):
         return self.cdf(b) - self.cdf(a)
 
@@ -83,7 +89,6 @@ class Normal(distribution.Distribution):
     # __or__ for Bayes priors?
     # __pow__(self, 2) --> ChiSq()
     # __truediv__ --> Cauchy()
-    # Remove scipy dependency
 
 class StandardNormal(Normal):
     def __init__(self):

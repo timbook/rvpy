@@ -8,4 +8,4 @@ class Bernoulli(binomial.Binomial):
         return f"Bernoulli(p={self.p})"
 
     def to_binomial(self):
-        return Binomial(n=1, p=self.p)
+        return binomial.Binomial(n=1, p=self.p)
