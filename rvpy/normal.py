@@ -7,6 +7,7 @@ class Normal(distribution.Distribution):
         assert isinstance(mu, (int, float)), "mu must be numeric!"
         assert isinstance(sigma, (int, float)), "sigma must be numeric!"
         assert sigma > 0, "sigma must be positive"
+
         # Parameters
         self.mu = mu
         self.sigma = sigma
@@ -70,9 +71,7 @@ class Normal(distribution.Distribution):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
 
     def pdf(self, x):
-        coef = 1 / (2 * np.pi * self.var)**0.5
-        pow = -0.5 * (x - self.mu)**2 / self.var
-        return coef * np.exp(pow)
+        return self.sp.pdf(x)
 
     def cdf(self, x):
         return self.sp.cdf(x)
@@ -91,7 +90,6 @@ class Normal(distribution.Distribution):
     # __or__ for Bayes priors?
     # __pow__(self, 2) --> ChiSq()
     # __truediv__ --> Cauchy()
-    # Remove scipy dependency
 
 class StandardNormal(Normal):
     def __init__(self):
