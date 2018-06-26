@@ -16,9 +16,6 @@ class CUniform(Distribution):
     def __repr__(self):
         return f"CUniform(a={self.a}, b={self.b})"
 
-    def __pos__(self):
-        return self
-
     def sample(self, *shape):
         return (self.b - self.a) * np.random.rand(*shape) + self.a
 

@@ -22,9 +22,6 @@ class Binomial(distribution.Distribution):
     def __repr__(self):
         return f"Binomial(n={self.n}, p={self.p})"
 
-    def __pos__(self):
-        return self
-
     def __add__(self, Y):
         assert isinstance(Y, Binomial), "can only add Binomials to Binomials"
         assert self.p == Y.p, "values of p must match in order to add"

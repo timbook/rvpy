@@ -7,6 +7,7 @@ class Normal(distribution.Distribution):
         assert isinstance(mu, (int, float)), "mu must be numeric!"
         assert isinstance(sigma, (int, float)), "sigma must be numeric!"
         assert sigma > 0, "sigma must be positive"
+
         # Parameters
         self.mu = mu
         self.sigma = sigma
@@ -60,9 +61,6 @@ class Normal(distribution.Distribution):
     def __neg__(self):
         return Normal(-self.mu, self.sigma)
 
-    def __pos__(self):
-        return self
-
     def sample(self, *shape):
         return np.random.randn(*shape)
 
@@ -70,9 +68,7 @@ class Normal(distribution.Distribution):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
 
     def pdf(self, x):
-        coef = 1 / (2 * np.pi * self.var)**0.5
-        pow = -0.5 * (x - self.mu)**2 / self.var
-        return coef * np.exp(pow)
+        return self.sp.pdf(x)
 
     def cdf(self, x):
         return self.sp.cdf(x)
