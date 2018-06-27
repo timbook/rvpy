@@ -38,7 +38,7 @@ class Normal(distribution.Distribution):
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
-            return Normal(other*self.mu, other*self.sigma)
+            return Normal(other*self.mu, float(np.abs(other)*self.sigma))
         else:
             raise TypeError("Only multiplicated by int or float supported.")
 
@@ -55,14 +55,13 @@ class Normal(distribution.Distribution):
         return Normal(-self.mu, self.sigma)
 
     def __sub__(self, other):
-        return self + (-other)
+        return self.__add__(-other)
 
     def __rsub__(self, other):
-        return other + (-self)
+        return (-self).__add__(other)
 
     def mgf(self, t):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
-
 
     def to_standard(self):
         if self.mu == 0 and self.sigma == 1:
