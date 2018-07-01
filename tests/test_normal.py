@@ -31,7 +31,6 @@ class NormalTests(unittest.TestCase):
         self.assertAlmostEqual(self.Z.cdf(10), 1)
         self.assertAlmostEqual(self.Z.cdf(-10), 0)
         self.assertAlmostEqual(self.Z.cdf(0), 0.5)
-
         self.assertAlmostEqual(self.N1.cdf(10), 1)
         self.assertAlmostEqual(self.N1.cdf(-10), 0)
         self.assertAlmostEqual(self.N1.cdf(self.rnd1), 0.5)
@@ -40,9 +39,20 @@ class NormalTests(unittest.TestCase):
         X = rvpy.Normal(0, 1)
         self.assertIsInstance(self.Z.to_nonstandard(), rvpy.Normal)
         self.assertIsInstance(X.to_standard(), rvpy.StandardNormal)
-
         with self.assertRaises(ValueError):
             self.N1.to_standard()
+
+    def test_test_add(self):
+        N1 = self.N1
+        m = random.random()
+        s = random.random()
+        N2 = rvpy.Normal(mu=m, sigma=s)
+        N3 = N1 + N2
+        new_mu = N1.mu + m
+        new_sigma = (N1.sigma**2 + s**2)**0.5
+        self.assertAlmostEqual(N3.mean, new_mu)
+        self.assertAlmostEqual(N3.sigma, new_sigma)
+        
 
 
 
