@@ -25,7 +25,7 @@ class Normal(distribution.Distribution):
 
     def __add__(self, other):
         if isinstance(other, Normal):
-            new_mu = other.mu
+            new_mu = other.mu + self.mu
             new_sigma = (self.var + other.var)**0.5
             return Normal(new_mu, new_sigma)
         elif isinstance(other, (int, float)):
