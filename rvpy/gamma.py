@@ -50,7 +50,7 @@ class Gamma(distribution.Distribution):
         if isinstance(other, (int, float)) and other != 0:
             return self.__mul__(1 / other)
         else:
-            raise ZeroDivisionError("Cannot divide a Normal by zero!")
+            raise ZeroDivisionError("Cannot divide by zero!")
 
     def mgf(self, t):
         return np.where(t < 1/self.beta,
