@@ -27,6 +27,13 @@ class NormalTests(unittest.TestCase):
         self.assertAlmostEqual(self.N1.pdf(10), 0)
         self.assertAlmostEqual(self.N1.pdf(-10), 0)
 
+        c = random.random()
+        self.assertAlmostEqual(
+            self.N1.pdf(self.N1.mean - c),
+            self.N1.pdf(self.N1.mean + c)
+        )
+        
+
     def test_normal_cdf(self):
         self.assertAlmostEqual(self.Z.cdf(10), 1)
         self.assertAlmostEqual(self.Z.cdf(-10), 0)
