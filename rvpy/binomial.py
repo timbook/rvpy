@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.stats import binom
-from . import distribution, bernoulli
+from . import distribution
 
 class Binomial(distribution.Distribution):
     def __init__(self, n, p):
@@ -37,3 +37,13 @@ class Binomial(distribution.Distribution):
     def to_bernoulli(self):
         assert self.n == 1, "Must have n == 1 to convert to downcast to Bernoulli"
         return bernoulli.Bernoulli(self.p)
+
+class Bernoulli(Binomial):
+    def __init__(self, p):
+        super().__init__(n=1, p=p)
+
+    def __repr__(self):
+        return f"Bernoulli(p={self.p})"
+
+    def to_binomial(self):
+        return Binomial(n=1, p=self.p)
