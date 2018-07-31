@@ -16,9 +16,6 @@ class Gamma(distribution.Distribution):
         # Initialize super - does nothing yet.
         super().__init__()
 
-        # Get moments
-        super()._moments()
-
     def __repr__(self):
         return f"Gamma(alpha={self.alpha}, beta={self.beta})"
 

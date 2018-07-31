@@ -20,9 +20,6 @@ class Binomial(distribution.Distribution):
         # Intialize super - does nothing yet.
         super().__init__()
 
-        # Get moments
-        super()._moments()
-
     def __repr__(self):
         return f"Binomial(n={self.n}, p={self.p})"
 

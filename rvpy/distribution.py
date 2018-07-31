@@ -1,6 +1,6 @@
 class Distribution:
     def __init__(self):
-        pass
+        self._moments()
 
     def _moments(self):
         m, v, s, k = self.sp.stats(moments = 'mvsk')
