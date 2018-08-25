@@ -19,7 +19,6 @@ ChiSq(df=1)
 * setup.py
 * `fit()` methods for each RV (`"MLE"`, `"MOM"`)
 * Remaining continuous distributions to add:
-    - Chi-sqare
     - Weibull
     - Rayleight
     - Double exponential / LaPlace
