@@ -4,7 +4,6 @@ from . import distribution
 
 class Gamma(distribution.Distribution):
     def __init__(self, alpha, beta):
-
         assert alpha > 0 and beta > 0, "alpha and beta must be positive"
 
         self.alpha = alpha

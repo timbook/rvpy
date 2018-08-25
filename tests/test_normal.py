@@ -49,7 +49,7 @@ class NormalTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.N1.to_standard()
 
-    def test_test_add(self):
+    def test_normal_add(self):
         N1 = self.N1
         m = random.random()
         s = random.random()
