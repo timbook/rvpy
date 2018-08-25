@@ -9,7 +9,7 @@ class Binomial(distribution.Distribution):
         assert isinstance(n, int), "n must be an integer"
 
         # Parameters
-        q = 1 - p
+        self.q = 1 - p
         self.p = p
         self.q = q
         self.n = n
@@ -37,6 +37,7 @@ class Binomial(distribution.Distribution):
 
 class Bernoulli(Binomial):
     def __init__(self, p):
+        # Get Bernoulli distribution initialization
         super().__init__(n=1, p=p)
 
     def __repr__(self):

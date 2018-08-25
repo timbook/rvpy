@@ -31,7 +31,7 @@ class Gamma(distribution.Distribution):
         return self.__add__(-other)
 
     def __rsub__(self, other):
-        (-self).__add__(other)
+        return (-self).__add__(other)
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
@@ -54,8 +54,24 @@ class Gamma(distribution.Distribution):
                    np.nan
                )
 
+    def to_exponential(self):
+        assert self.alpha == 1, "Alpha must be 1 to downcast"
+        return Exponential(self.beta)
+
+class Exponential(Gamma):
+    def __init__(self, rate):
+        # Get Gamma distribution initialization
+        super().__init__(1, self.rate)
+
+        # Parameters
+        self.rate = rate
+        self.scale = 1 / rate
 
 
+    def __repr__(self):
+        return f"Exponential(rate={self.rate})"
 
+    def to_gamma(self):
+        return Gamma(alpha=1, beta=self.rate)
 
 

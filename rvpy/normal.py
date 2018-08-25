@@ -74,6 +74,7 @@ class Normal(distribution.Distribution):
 
 class StandardNormal(Normal):
     def __init__(self):
+        # Get non-standard Normal distribution initialization
         super().__init__(0, 1)
 
     def __repr__(self):
