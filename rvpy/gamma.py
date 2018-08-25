@@ -61,7 +61,7 @@ class Gamma(distribution.Distribution):
 class Exponential(Gamma):
     def __init__(self, rate):
         # Get Gamma distribution initialization
-        super().__init__(1, self.rate)
+        super().__init__(1, 1/rate)
 
         # Parameters
         self.rate = rate
@@ -72,6 +72,18 @@ class Exponential(Gamma):
         return f"Exponential(rate={self.rate})"
 
     def to_gamma(self):
-        return Gamma(alpha=1, beta=self.rate)
+        return Gamma(alpha=1, beta=self.scale)
 
+class ChiSq(Gamma):
+    def __init__(self, df):
+        # Get Gamma distribution initialization
+        super().__init__(2*df, 2)
 
+        # Parameters
+        self.df = df
+
+    def __repr__(self):
+        return f"ChiSq(df={self.df})"
+
+    def to_gamma(self):
+        return Gamma(alpha=2*df, beta=2)

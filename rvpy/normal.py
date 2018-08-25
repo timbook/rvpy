@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.stats import norm
 from . import distribution
+from . import gamma
 
 class Normal(distribution.Distribution):
     def __init__(self, mu=0, sigma=1):
@@ -82,6 +83,10 @@ class StandardNormal(Normal):
 
     def to_nonstandard(self):
         return Normal(mu=0, sigma=1)
+
+    def __pow__(self, k):
+        assert k == 2, "Only squaring standard normal is supportd"
+        return gamma.ChiSq(1)
 
     # TODO: __pow__(self, 2) --> ChiSq()
 
