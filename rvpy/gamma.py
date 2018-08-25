@@ -67,7 +67,6 @@ class Exponential(Gamma):
         self.rate = rate
         self.scale = 1 / rate
 
-
     def __repr__(self):
         return f"Exponential(rate={self.rate})"
 
@@ -77,7 +76,7 @@ class Exponential(Gamma):
 class ChiSq(Gamma):
     def __init__(self, df):
         # Get Gamma distribution initialization
-        super().__init__(2*df, 2)
+        super().__init__(alpha=2*df, beta=2)
 
         # Parameters
         self.df = df

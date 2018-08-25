@@ -20,9 +20,8 @@ ChiSq(df=1)
 * `fit()` methods for each RV (`"MLE"`, `"MOM"`)
 * Remaining continuous distributions to add:
     - Weibull
-    - Rayleight
-    - Double exponential / LaPlace
-    - Beta
+    - Rayleigh
+    - Double exponential / Laplace
     - F
     - t
     - Cauchy
