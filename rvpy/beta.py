@@ -14,7 +14,7 @@ class Beta(distribution.Distribution):
         # Scipy backend
         self.sp = bta(alpha, beta)
 
-        # Initialize super - does nothing yet.
+        # Initialize super
         super().__init__()
 
     def __repr__(self):

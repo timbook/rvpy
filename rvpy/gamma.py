@@ -12,7 +12,7 @@ class Gamma(distribution.Distribution):
         # Scipy backend
         self.sp = gamma(a=alpha, scale=beta)
 
-        # Initialize super - does nothing yet.
+        # Initialize super
         super().__init__()
 
     def __repr__(self):

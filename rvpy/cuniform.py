@@ -13,7 +13,7 @@ class CUniform(distribution.Distribution):
         # Scipy backend
         self.sp = uniform(a, b - a)
 
-        # Intialize super - does nothing yet.
+        # Intialize super
         super().__init__()
 
     def __repr__(self):

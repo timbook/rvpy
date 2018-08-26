@@ -15,7 +15,7 @@ class Normal(distribution.Distribution):
         # Scipy backend
         self.sp = norm(mu, sigma)
 
-        # Intialize super - does nothing yet.
+        # Intialize super
         super().__init__()
 
     def __repr__(self):

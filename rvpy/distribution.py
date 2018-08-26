@@ -6,7 +6,7 @@ class Distribution:
         m, v, s, k = self.sp.stats(moments = 'mvsk')
         self.mean = float(m)
         self.var = float(v)
-        self.std = v**0.5
+        self.std = self.var**0.5
         self.skew = float(s)
         self.kurtosis = float(k)
 

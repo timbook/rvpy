@@ -17,7 +17,7 @@ class Binomial(distribution.Distribution):
         # Scipy backend
         self.sp = binom(n, p)
 
-        # Intialize super - does nothing yet.
+        # Intialize super
         super().__init__()
 
     def __repr__(self):
