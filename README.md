@@ -23,7 +23,6 @@ ChiSq(df=1)
     - Rayleigh
     - Double exponential / Laplace
     - F
-    - t
     - Cauchy
     - Lognormal
 * Remaining discrete distributions to add:
