@@ -27,10 +27,9 @@ class Gamma(distribution.Distribution):
         else:
             raise TypeError("Only addition of Gamma families supported")
 
-
     def __mul__(self, other):
         if isinstance(other, (int, float)):
-            return Gamma(self.alpha, other*self.beta)
+            return Gamma(self.alpha, self.beta / other)
         else:
             raise TypeError("Only multiplication by scalar supported")
 
