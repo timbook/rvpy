@@ -12,7 +12,6 @@ class Distribution:
 
         self.median = float(self.sp.median())
         self.entropy = float(self.sp.entropy())
-    
 
     def __pos__(self):
         return self

@@ -25,17 +25,10 @@ class CUniform(distribution.Distribution):
         else:
             raise TypeError("Only scalar addition for CUniforms is supported.")
 
-    def __radd__(self, c):
-        return self.__add__(c)
-
-    def __mul__(self, c):
         if isinstance(c, (int, float)):
             return CUniform(self.a * c, self.b * c)
         else:
             raise TypeError("Only scalar multiplication for CUniforms is supported.")
-
-    def __rmul__(self, c):
-        return self.__mul__(c)
 
     def mgf(self, t):
         # TODO: Why is t = 0 throwing a warning?
@@ -48,4 +41,4 @@ class CUniform(distribution.Distribution):
     # TODO: -logU = Exp(1)?
     # TODO: U**n = Beta(1/n, 1)
     # TODO: U.to_beta() --> Beta(1, 1)
-    
+    # TODO: Handle __truediv__ for scalars?

@@ -31,17 +31,11 @@ class Normal(distribution.Distribution):
         else:
             raise TypeError("Only addition by another (independent) Normal, int, or float supported.")
 
-    def __radd__(self, other):
-        return self.__add__(other)
-
     def __mul__(self, other):
         if isinstance(other, (int, float)):
             return Normal(other*self.mu, float(np.abs(other)*self.sigma))
         else:
             raise TypeError("Only multiplicated by int or float supported.")
-
-    def __rmul__(self, other):
-        return self.__mul__(other)
 
     def __truediv__(self, other):
         if isinstance(other, (int, float)) and other != 0:
@@ -51,12 +45,6 @@ class Normal(distribution.Distribution):
 
     def __neg__(self):
         return Normal(-self.mu, self.sigma)
-
-    def __sub__(self, other):
-        return self.__add__(-other)
-
-    def __rsub__(self, other):
-        return (-self).__add__(other)
 
     def mgf(self, t):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
@@ -69,7 +57,6 @@ class Normal(distribution.Distribution):
 
     # TODO:
     # - __iadd__, __imul__, __truediv__, ...
-    # __or__ for Bayes priors?
     # __pow__(self, 2) --> ChiSq()
     # __truediv__ --> Cauchy()
 
