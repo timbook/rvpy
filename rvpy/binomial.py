@@ -9,9 +9,8 @@ class Binomial(distribution.Distribution):
         assert isinstance(n, int), "n must be an integer"
 
         # Parameters
-        self.q = 1 - p
         self.p = p
-        self.q = q
+        self.q = 1 - p
         self.n = n
 
         # Scipy backend
