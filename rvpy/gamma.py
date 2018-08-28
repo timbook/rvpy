@@ -50,16 +50,16 @@ class Gamma(distribution.Distribution):
         return Exponential(self.beta)
 
 class Exponential(Gamma):
-    def __init__(self, rate):
+    def __init__(self, scale):
         # Get Gamma distribution initialization
-        super().__init__(1, 1/rate)
+        super().__init__(1, scale)
 
         # Parameters
-        self.rate = rate
-        self.scale = 1 / rate
+        self.scale = scale
+        self.rate = 1 / scale
 
     def __repr__(self):
-        return f"Exponential(rate={self.rate})"
+        return f"Exponential(scale={self.scale})"
 
     def to_gamma(self):
         return Gamma(alpha=1, beta=self.scale)
