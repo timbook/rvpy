@@ -87,7 +87,3 @@ class StandardNormal(Normal):
     def __pow__(self, k):
         assert k == 2, "Only squaring standard normal is supportd"
         return gamma.ChiSq(1)
-
-    # TODO: __pow__(self, 2) --> ChiSq()
-
-
