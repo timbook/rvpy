@@ -17,6 +17,18 @@ class Distribution:
     def __pos__(self):
         return self
 
+    def __radd__(self, other):
+        return self.__add__(other)
+
+    def __sub__(self, other):
+        return self.__add__(-other)
+
+    def __rsub__(self, other):
+        return (-self).__add__(other)
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
     def pdf(self, x):
         return self.sp.pdf(x)
 

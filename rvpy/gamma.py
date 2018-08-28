@@ -19,28 +19,20 @@ class Gamma(distribution.Distribution):
         return f"Gamma(alpha={self.alpha}, beta={self.beta})"
 
     def __add__(self, other):
-        if isinstance(other, Gamma):
-            return Gamma(self.alpha + other.alpha, self.beta)
+        if isinstance(other, Gamma) and (self.beta == other.beta):
+            if self.beta != other.beta:
+                raise ValueError("Scale paramters of Gamma families must match")
+            else:
+                return Gamma(self.alpha + other.alpha, self.beta)
         else:
-            raise TypeError("Only addition of scalars supported")
+            raise TypeError("Only addition of Gamma families supported")
 
-    def __radd__(self, other):
-        return self.__add__(other)
-
-    def __sub__(self, other):
-        return self.__add__(-other)
-
-    def __rsub__(self, other):
-        return (-self).__add__(other)
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
             return Gamma(self.alpha, other*self.beta)
         else:
             raise TypeError("Only multiplication by scalar supported")
-
-    def __rmul__(self, other):
-        return self.__mul__(other)
 
     def __truediv__(self, other):
         if isinstance(other, (int, float)) and other != 0:
@@ -83,6 +75,12 @@ class ChiSq(Gamma):
 
     def __repr__(self):
         return f"ChiSq(df={self.df})"
+
+    def __add__(self, other):
+        if isinstance(other, ChiSq):
+            return ChiSq(self.df + other.df)
+        else:
+            return self.to_gamma() + other
 
     def to_gamma(self):
         return Gamma(alpha=2*df, beta=2)
