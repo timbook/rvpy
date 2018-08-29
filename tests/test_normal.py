@@ -21,6 +21,9 @@ class NormalTests(unittest.TestCase):
         self.assertEqual(self.N1.std, self.rnd2)
         self.assertEqual(self.N1.var, self.rnd2**2)
 
+        print("Unresolved TODOs!")
+        # TODO: Higher moments?
+
     def test_normal_pdf(self):
         self.assertAlmostEqual(self.Z.pdf(10), 0)
         self.assertAlmostEqual(self.Z.pdf(-10), 0)
@@ -32,7 +35,11 @@ class NormalTests(unittest.TestCase):
             self.N1.pdf(self.N1.mean - c),
             self.N1.pdf(self.N1.mean + c)
         )
-        
+
+        self.assertAlmostEqual(
+            self.Z.pdf(self.Z.mean - c),
+            self.Z.pdf(self.Z.mean + c)
+        )
 
     def test_normal_cdf(self):
         self.assertAlmostEqual(self.Z.cdf(10), 1)
@@ -49,7 +56,7 @@ class NormalTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.N1.to_standard()
 
-    def test_normal_add(self):
+    def test_normal_add_sub(self):
         N1 = self.N1
         m = random.random()
         s = random.random()
@@ -59,7 +66,13 @@ class NormalTests(unittest.TestCase):
         new_sigma = (N1.sigma**2 + s**2)**0.5
         self.assertAlmostEqual(N3.mean, new_mu)
         self.assertAlmostEqual(N3.sigma, new_sigma)
-        
+
+        # TODO: Subtraction tests
+        print("Unresolved TODOs!")
+
+    def test_normal_mul_div(self):
+        # TODO: This
+        print("Unresolved TODOs!")
 
 
 
