@@ -8,12 +8,12 @@ colEcho() {
     echo -e "${BLUE}${1}${ENDCOL}"
 }
 
-dists=( "normal" "binomial" )
+dists=( "normal" "binomial" "cuniform" )
 
 for dist in ${dists[@]}
 do
     dist_cap=$(echo $dist | tr a-z A-Z)
-    colEcho ":::$dist_cap TESTS"
+    colEcho "::: $dist_cap TESTS"
     python3 -m unittest -q tests/test_$dist.py
     echo ""
 done
