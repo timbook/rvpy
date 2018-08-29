@@ -25,6 +25,7 @@ class CUniform(distribution.Distribution):
         else:
             raise TypeError("Only scalar addition for CUniforms is supported.")
 
+    def __mul__(self, c):
         if isinstance(c, (int, float)):
             return CUniform(self.a * c, self.b * c)
         else:
