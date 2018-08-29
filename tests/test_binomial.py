@@ -26,7 +26,6 @@ class BinomialTests(unittest.TestCase):
         self.assertAlmostEqual(self.Y.var, self.Y.p*self.Y.q)
         self.assertAlmostEqual(self.Y.std, (self.Y.p*self.Y.q)**0.5)
 
-        print("Unresolved TODOs!")
         # TODO: Higher moments?
 
     def test_bin_pmf(self):
@@ -54,8 +53,13 @@ class BinomialTests(unittest.TestCase):
 
     def test_bin_conversion(self):
         # TODO: This
-        print("Unresolved TODOs!")
+        pass
 
     def test_bin_add(self):
         # TODO: This
-        print("Unresolved TODOs!")
+        pass
+
+    def test_bin_errors(self):
+        # TODO: This
+        pass
+

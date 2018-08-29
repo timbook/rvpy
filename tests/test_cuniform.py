@@ -1,7 +1,6 @@
 import unittest
 import sys
-import random
-
+import random 
 sys.path.append('..')
 
 import rvpy
@@ -47,20 +46,26 @@ class CUniformTests(unittest.TestCase):
         V_height = 1 / (b - a)
 
         self.assertEqual(self.V.pdf(a - rnd), 0)
-        self.assertEqual(self.V.pdf(b*rnd + a), V_height)
         self.assertEqual(self.V.pdf((a + b) / 2), V_height)
-        self.assertEqual(self.V.pdf(b - rnd), V_height)
         self.assertEqual(self.V.pdf(b + rnd), 0)
 
     def test_cunif_cdf(self):
-        print("Unresolved TODOs!")
+        # TODO: This
+        pass
 
     def test_cunif_conversion(self):
-        # TODO: Conversion to Beta 
-        print("Unresolved TODOs!")
+        # TODO: This
+        pass
 
     def test_cunif_add_sub(self):
-        print("Unresolved TODOs!")
+        # TODO: This
+        pass
 
     def test_cunif_mul_div(self):
-        print("Unresolved TODOs!")
+        # TODO: This
+        pass
+
+    def test_cunif_errors(self):
+        # TODO: This
+        pass
+
