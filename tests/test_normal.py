@@ -68,9 +68,8 @@ class NormalTests(unittest.TestCase):
         self.assertEqual(self.Z.to_nonstandard().std, 1)
 
         # Standardizing produces standard normal
-        # TODO: Fix
-        #  Z = (self.X - self.X.mean) / self.X.std
-        #  self.assertIsInstance(Z.to_standard(), rvpy.StandardNormal)
+        Z = (self.X - self.X.mean) / self.X.std
+        self.assertIsInstance(Z.to_standard(), rvpy.StandardNormal)
 
     def test_normal_add_sub(self):
         X1 = self.X

@@ -50,13 +50,12 @@ class Normal(distribution.Distribution):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
 
     def to_standard(self):
-        if self.mu == 0 and self.sigma == 1:
+        if np.round(self.mu, 7) == 0 and np.round(self.sigma, 7) == 1:
             return StandardNormal()
         else:
             raise ValueError("Must be Normal(0, 1) to standardize!")
 
     # TODO:
-    # - __iadd__, __imul__, __truediv__, ...
     # __pow__(self, 2) --> ChiSq()
     # __truediv__ --> Cauchy()
 
