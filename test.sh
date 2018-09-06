@@ -21,7 +21,10 @@ do
     num_todo=$(grep "TODO" tests/test_$dist.py | wc -l)
 
     blueEcho "::: $dist_cap TESTS"
-    redEcho "$num_todo TODO(S) REMAINING"
+    if (( $num_todo != 0 )) 
+    then
+        redEcho "$num_todo TODO(S) REMAINING"
+    fi
     python3 -m unittest -q tests/test_$dist.py
     echo ""
 done

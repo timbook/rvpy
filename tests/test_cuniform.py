@@ -42,28 +42,75 @@ class CUniformTests(unittest.TestCase):
         # Nonstandard uniform is a block from [a, b] of height 1 / (b - a)
         a = self.V.a
         b = self.V.b
-        rnd = random.random()
+        eps = 1e-5
         V_height = 1 / (b - a)
 
-        self.assertEqual(self.V.pdf(a - rnd), 0)
+        self.assertEqual(self.V.pdf(a - eps), 0)
         self.assertEqual(self.V.pdf((a + b) / 2), V_height)
-        self.assertEqual(self.V.pdf(b + rnd), 0)
+        self.assertEqual(self.V.pdf(b + eps), 0)
 
     def test_cunif_cdf(self):
-        # TODO: This
-        pass
+        eps = 1e-5
+
+        # Standard uniform is identity line from 0 to 1
+        self.assertEqual(self.U.cdf(0 - eps), 0)
+        self.assertEqual(self.U.cdf(1 + eps), 1)
+
+        for i in range(5):
+            r = random.random()
+            self.assertEqual(self.U.cdf(r), r)
+
+        # Nonstandard uniform is line from a to b
+        a = self.V.a
+        b = self.V.b
+        V_height = 1 / (b - a)
+
+        self.assertEqual(self.V.cdf(a - eps), 0)
+        self.assertEqual(self.V.cdf(b + eps), 1)
+        for i in range(5):
+            r = a + random.random()*(b - a)
+            self.assertEqual(self.V.cdf(r), (r - a)/(b - a))
 
     def test_cunif_conversion(self):
         # TODO: This
         pass
 
     def test_cunif_add_sub(self):
-        # TODO: This
-        pass
+        c = random.randint(1, 11)
+        d = random.randint(-11, -1)
+
+        # Adding shifts to the right
+        Vplus = self.V + c
+        self.assertAlmostEqual(Vplus.a, self.V.a + c)
+        self.assertAlmostEqual(Vplus.b, self.V.b + c)
+        self.assertAlmostEqual(Vplus.mean, self.V.mean + c)
+        self.assertAlmostEqual(Vplus.median, self.V.median + c)
+        self.assertAlmostEqual(Vplus.var, self.V.var)
+        self.assertAlmostEqual(Vplus.std, self.V.std)
+
+        # Subtracting has same results
+        Vminus = self.V + d
+        self.assertAlmostEqual(Vminus.a, self.V.a + d)
+        self.assertAlmostEqual(Vminus.b, self.V.b + d)
+        self.assertAlmostEqual(Vminus.mean, self.V.mean + d)
+        self.assertAlmostEqual(Vminus.median, self.V.median + d)
+        self.assertAlmostEqual(Vminus.var, self.V.var)
+        self.assertAlmostEqual(Vminus.std, self.V.std)
+
 
     def test_cunif_mul_div(self):
-        # TODO: This
-        pass
+        c = random.randint(1, 11)
+
+        # Multiplication for nonstandard cuniform
+        Vmult = c*self.V
+        self.assertAlmostEqual(Vmult.a, c*self.V.a)
+        self.assertAlmostEqual(Vmult.b, c*self.V.b)
+        self.assertAlmostEqual(Vmult.mean, c*self.V.mean)
+        self.assertAlmostEqual(Vmult.var, (c**2)*self.V.var)
+
+        # Division does the same inward
+        # TODO: Division
+
 
     def test_cunif_errors(self):
         # TODO: This
