@@ -131,5 +131,5 @@ class NormalTests(unittest.TestCase):
         ]
         for od in other_dists:
             with self.assertRaises(TypeError):
-                W = rvpy.F(3, 5)
+                W = od
                 self.X + W

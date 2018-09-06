@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.stats import uniform
 from . import distribution
+from . import beta
 
 class CUniform(distribution.Distribution):
     def __init__(self, a=0, b=1):
@@ -31,6 +32,19 @@ class CUniform(distribution.Distribution):
         else:
             raise TypeError("Only scalar multiplication for CUniforms is supported.")
 
+    def __truediv__(self, other):
+        if isinstance(other, (int, float)) and other != 0:
+            return self.__mul__(1 / other)
+        else:
+            raise ZeroDivisionError("Division by zero error")
+
+    def __pow__(self, n):
+        assert isinstance(n, int), "Can only raise CUniform to integer power"
+        if self.a == 0 and self.b == 1:
+            return beta.Beta(1/n, 1)
+        else:
+            raise TypeError("Can only raise CUniform(0, 1) to integer power")
+
     def mgf(self, t):
         # TODO: Why is t = 0 throwing a warning?
         def mgf_not_0(t):
@@ -39,7 +53,8 @@ class CUniform(distribution.Distribution):
             return num / den
         return np.where(t == 0, 1, mgf_not_0(t))
 
-    # TODO: -logU = Exp(1)?
-    # TODO: U**n = Beta(1/n, 1)
-    # TODO: U.to_beta() --> Beta(1, 1)
-    # TODO: Handle __truediv__ for scalars?
+    def to_beta(self):
+        if self.a == 0 and self.b == 1:
+            return beta.Beta(1, 1)
+        else:
+            raise TypeError("Must have CUniform(0, 1) to convert to Beta(1, 1)")

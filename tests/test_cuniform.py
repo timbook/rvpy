@@ -1,9 +1,10 @@
 import unittest
 import sys
 import random 
-sys.path.append('..')
 
 import rvpy
+
+sys.path.append('..')
 
 class CUniformTests(unittest.TestCase):
     def setUp(self):
@@ -72,8 +73,13 @@ class CUniformTests(unittest.TestCase):
             self.assertEqual(self.V.cdf(r), (r - a)/(b - a))
 
     def test_cunif_conversion(self):
-        # TODO: This
-        pass
+        B = self.U**3
+
+        self.assertIsInstance(self.U.to_beta(), rvpy.Beta)
+        self.assertIsInstance(B, rvpy.Beta)
+
+        self.assertAlmostEqual(B.alpha, 1/3)
+        self.assertAlmostEqual(B.beta, 1)
 
     def test_cunif_add_sub(self):
         c = random.randint(1, 11)
@@ -97,9 +103,9 @@ class CUniformTests(unittest.TestCase):
         self.assertAlmostEqual(Vminus.var, self.V.var)
         self.assertAlmostEqual(Vminus.std, self.V.std)
 
-
     def test_cunif_mul_div(self):
         c = random.randint(1, 11)
+        d = random.randint(1, 11)
 
         # Multiplication for nonstandard cuniform
         Vmult = c*self.V
@@ -109,10 +115,32 @@ class CUniformTests(unittest.TestCase):
         self.assertAlmostEqual(Vmult.var, (c**2)*self.V.var)
 
         # Division does the same inward
-        # TODO: Division
-
+        Vdiv = self.V / d
+        self.assertAlmostEqual(Vdiv.a, self.V.a / d)
+        self.assertAlmostEqual(Vdiv.b, self.V.b / d)
+        self.assertAlmostEqual(Vdiv.mean, self.V.mean / d)
+        self.assertAlmostEqual(Vdiv.var, self.V.var / (d**2))
 
     def test_cunif_errors(self):
-        # TODO: This
-        pass
+        # Assert a < b
+        with self.assertRaises(AssertionError): rvpy.CUniform(2, 1)
+        with self.assertRaises(AssertionError): rvpy.CUniform(1, 1)
+        with self.assertRaises(TypeError): self.V.to_beta()
+        with self.assertRaises(TypeError): self.V**3
+
+        # Can't add other dists to cuniform
+        other_dists = [
+            rvpy.Bernoulli(0.3),
+            rvpy.Binomial(5, 0.4),
+            rvpy.CUniform(),
+            rvpy.F(3, 5),
+            rvpy.Gamma(3, 2),
+            rvpy.Exponential(5),
+            rvpy.ChiSq(3),
+            rvpy.T(3)
+        ]
+        for od in other_dists:
+            with self.assertRaises(TypeError):
+                W = od
+                self.V + W
 
