@@ -26,8 +26,6 @@ class BinomialTests(unittest.TestCase):
         self.assertAlmostEqual(self.Y.var, self.Y.p*self.Y.q)
         self.assertAlmostEqual(self.Y.std, (self.Y.p*self.Y.q)**0.5)
 
-        # TODO: Higher moments?
-
     def test_bin_pmf(self):
         # Probability of support sums to 1
         self.assertAlmostEqual(self.Y.pmf(0) + self.Y.pmf(1), 1)
@@ -60,6 +58,17 @@ class BinomialTests(unittest.TestCase):
         pass
 
     def test_bin_errors(self):
-        # TODO: This
-        pass
+        # Parameter errors
+        with self.assertRaises(AssertionError): rvpy.Binomial(-1, 0.1)
+        with self.assertRaises(AssertionError): rvpy.Binomial(3, -0.1)
+        with self.assertRaises(AssertionError): rvpy.Binomial(3, 0)
+        with self.assertRaises(AssertionError): rvpy.Binomial(3, 1)
+        with self.assertRaises(AssertionError): rvpy.Binomial(3, 1.1)
 
+        with self.assertRaises(AssertionError): rvpy.Bernoulli(-0.1)
+        with self.assertRaises(AssertionError): rvpy.Bernoulli(0)
+        with self.assertRaises(AssertionError): rvpy.Bernoulli(1)
+        with self.assertRaises(AssertionError): rvpy.Bernoulli(1.1)
+
+        # Can't convert if n != 1
+        with self.assertRaises(AssertionError): rvpy.Binomial(3, 0.5).to_bernoulli()

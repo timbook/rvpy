@@ -5,6 +5,7 @@ from . import distribution
 class Binomial(distribution.Distribution):
     def __init__(self, n, p):
         assert p < 1 and p > 0, "p must be a float between 0 and 1"
+        assert n > 0, "n must be a positive integer"
         assert isinstance(p, float), "p must be a float"
         assert isinstance(n, int), "n must be an integer"
 
