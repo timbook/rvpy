@@ -33,7 +33,7 @@ class Binomial(distribution.Distribution):
 
     def to_bernoulli(self):
         assert self.n == 1, "Must have n == 1 to convert to downcast to Bernoulli"
-        return bernoulli.Bernoulli(self.p)
+        return Bernoulli(self.p)
 
 class Bernoulli(Binomial):
     def __init__(self, p):

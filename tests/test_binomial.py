@@ -50,8 +50,9 @@ class BinomialTests(unittest.TestCase):
         self.assertEqual(self.Y.cdf(1), 1)
 
     def test_bin_conversion(self):
-        # TODO: This
-        pass
+        self.assertIsInstance(self.Y.to_binomial(), rvpy.Binomial)
+        Z = rvpy.Binomial(1, 0.5)
+        self.assertIsInstance(Z.to_bernoulli(), rvpy.Bernoulli)
 
     def test_bin_add(self):
         # TODO: This
@@ -72,3 +73,7 @@ class BinomialTests(unittest.TestCase):
 
         # Can't convert if n != 1
         with self.assertRaises(AssertionError): rvpy.Binomial(3, 0.5).to_bernoulli()
+
+
+
+
