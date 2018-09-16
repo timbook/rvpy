@@ -13,7 +13,7 @@ redEcho() {
     echo -e "${RED}${1}${ENDCOL}"
 }
 
-dists=( "normal" "binomial" "cuniform" "beta")
+dists=( "normal" "binomial" "cuniform" "beta" "t")
 
 for dist in ${dists[@]}
 do
