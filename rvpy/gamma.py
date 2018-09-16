@@ -19,7 +19,7 @@ class Gamma(distribution.Distribution):
         return f"Gamma(alpha={self.alpha}, beta={self.beta})"
 
     def __add__(self, other):
-        if isinstance(other, Gamma) and (self.beta == other.beta):
+        if isinstance(other, Gamma):
             if self.beta != other.beta:
                 raise ValueError("Scale paramters of Gamma families must match")
             else:
