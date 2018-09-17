@@ -17,19 +17,10 @@ ChiSq(df=1)
 ## TODO:
 * Documentation
 * setup.py
-* `fit()` methods for each RV (`"MLE"`, `"MOM"`)
-* Remaining continuous distributions to add:
-    - Weibull
-    - Rayleigh
-    - Double exponential / Laplace
-    - Cauchy
-    - Lognormal
-* Remaining discrete distributions to add:
-    - DUniform
-    - Hypergeometric
-    - Poisson
-    - Beta-binomial
-    - Negative binomial
-    - Geometric
+* Various more distributions to add
 
+## Future ideas:
+* `fit()` methods for each RV (choice of `"MLE"`, `"MOM"`?)
+* Multivariate distributions
+* Maybe implementing a `.given()` method for conditional distributions
 

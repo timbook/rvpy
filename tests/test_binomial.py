@@ -59,9 +59,13 @@ class BinomialTests(unittest.TestCase):
         X = rvpy.Binomial(random.randint(2, 10), p)
         Y = rvpy.Binomial(random.randint(2, 10), p)
         Z = X + Y
+
+        # Sum of bins
         self.assertEqual(Z.p, p)
         self.assertEqual(Z.n, X.n + Y.n)
 
+        # Sum of n Ber(p) is Bin(n, p)
+        # Also tests Bin + Ber
         n_ber = random.randint(2, 10)
         p_ber = random.random()
         ber_list = [rvpy.Bernoulli(p_ber) for _ in range(n_ber)]
