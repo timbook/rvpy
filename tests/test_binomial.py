@@ -55,8 +55,24 @@ class BinomialTests(unittest.TestCase):
         self.assertIsInstance(Z.to_bernoulli(), rvpy.Bernoulli)
 
     def test_bin_add(self):
-        # TODO: This
-        pass
+        p = random.random()
+        X = rvpy.Binomial(random.randint(2, 10), p)
+        Y = rvpy.Binomial(random.randint(2, 10), p)
+        Z = X + Y
+        self.assertEqual(Z.p, p)
+        self.assertEqual(Z.n, X.n + Y.n)
+
+        n_ber = random.randint(2, 10)
+        p_ber = random.random()
+        ber_list = [rvpy.Bernoulli(p_ber) for _ in range(n_ber)]
+        ber_cum = ber_list[0]
+        for i in range(1, n_ber):
+            # TODO: Switch to iadd
+            ber_cum = ber_cum + ber_list[i]
+
+        self.assertEqual(ber_cum.p, p_ber)
+        self.assertEqual(ber_cum.n, n_ber)
+        
 
     def test_bin_errors(self):
         # Parameter errors
