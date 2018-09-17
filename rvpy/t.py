@@ -20,8 +20,11 @@ class T(distribution.Distribution):
         return f"T(df={self.df})"
 
     def __pow__(self, k):
-        assert k == 2, "Only squaring t distribution is supported"
-        return f.F(1, self.df)
+        assert k == 2 or k == -2, "Only squaring t distribution is supported"
+        if k == 2:
+            return f.F(1, self.df)
+        elif k == -2:
+            return f.F(self.df, 1)
 
     # TODO: Fix moments from low df
     # TODO: to_cauchy() if df == 1

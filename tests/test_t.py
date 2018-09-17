@@ -34,11 +34,17 @@ class TDistTests(unittest.TestCase):
         self.assertAlmostEqual(self.X.cdf(15), 1)
 
     def test_t_conversion(self):
-        Xconv = self.X**2
         self.assertIsInstance(self.X, rvpy.T)
+        
+        Xconv = self.X**2
         self.assertIsInstance(Xconv, rvpy.F)
         self.assertEqual(Xconv.df1, 1)
         self.assertEqual(Xconv.df2, self.nu)
+
+        Xconvinv = self.X**-2
+        self.assertIsInstance(Xconvinv, rvpy.F)
+        self.assertEqual(Xconvinv.df1, self.nu)
+        self.assertEqual(Xconvinv.df2, 1)
 
         # TODO: .to_cauchy()
 
