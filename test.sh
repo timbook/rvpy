@@ -13,10 +13,7 @@ redEcho() {
     echo -e "${RED}${1}${ENDCOL}"
 }
 
-dists=( "normal" "binomial" "cuniform" "beta" "t" "f")
-
-for dist in ${dists[@]}
-do
+testDist() {
     dist_cap=$(echo $dist | tr a-z A-Z)
     num_todo=$(grep "TODO" tests/test_$dist.py | wc -l)
 
@@ -27,4 +24,18 @@ do
     fi
     python3 -m unittest -q tests/test_$dist.py
     echo ""
-done
+}
+
+if [[ $# -eq 0 ]]; then
+    dists=( "normal" "binomial" "cuniform" "beta" "t" "f" "gamma")
+    for dist in ${dists[@]}
+    do
+        testDist $dist
+    done
+else
+    for dist in "$@"
+    do
+        testDist $dist
+    done
+fi
+

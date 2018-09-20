@@ -25,11 +25,11 @@ class Gamma(distribution.Distribution):
             else:
                 return Gamma(self.alpha + other.alpha, self.beta)
         else:
-            raise TypeError("Only addition of Gamma families supported")
+            raise TypeError("Only addition/subtraction of Gamma families supported")
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
-            return Gamma(self.alpha, self.beta / other)
+            return Gamma(self.alpha, other*self.beta)
         else:
             raise TypeError("Only multiplication by scalar supported")
 
@@ -67,7 +67,7 @@ class Exponential(Gamma):
 class ChiSq(Gamma):
     def __init__(self, df):
         # Get Gamma distribution initialization
-        super().__init__(alpha=2*df, beta=2)
+        super().__init__(alpha=df/2, beta=2)
 
         # Parameters
         self.df = df
@@ -82,4 +82,4 @@ class ChiSq(Gamma):
             return self.to_gamma() + other
 
     def to_gamma(self):
-        return Gamma(alpha=2*df, beta=2)
+        return Gamma(alpha=self.df/2, beta=2)
