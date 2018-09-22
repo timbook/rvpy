@@ -6,6 +6,7 @@ from .gamma import Gamma, Exponential, ChiSq
 from .beta import Beta
 from .t import T
 from .f import F
+from .cauchy import Cauchy, StandardCauchy
 
 __all__ = [
     'Normal', 'StandardNormal',
@@ -14,5 +15,6 @@ __all__ = [
     'Gamma', 'ChiSq', 'Exponential'
     'Beta',
     'T',
-    'F'
+    'F',
+    'Cauchy', 'StandardCauchy'
 ]
