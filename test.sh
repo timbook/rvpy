@@ -27,7 +27,7 @@ testDist() {
 }
 
 if [[ $# -eq 0 ]]; then
-    dists=( "normal" "binomial" "cuniform" "beta" "t" "f" "gamma")
+    dists=( "normal" "binomial" "cuniform" "beta" "t" "f" "gamma" "poisson")
     for dist in ${dists[@]}
     do
         testDist $dist
