@@ -46,14 +46,13 @@ class Cauchy(distribution.Distribution):
         self.__mul__(1/other)
 
     def __rtruediv__(self, other):
+        assert self.loc == 0, 'Can only invert Cauchy distributions with location 0'
         if other == 1:
             return Cauchy(0, 1/self.scale)
         elif isinstance(other, (int, float)):
             return other*Cauchy(0, 1/self.scale)
         else:
             raise TypeError(f"Can't divide objects of type {type(other)} by Cauchy")
-
-    # TODO: 1 / X --> Cauchy(0, 1/scale)
 
     def to_standard(self):
         assert self.loc == 0 and self.scale == 1,\
