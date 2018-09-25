@@ -45,6 +45,14 @@ class Cauchy(distribution.Distribution):
     def __truediv__(self, other):
         self.__mul__(1/other)
 
+    def __rtruediv__(self, other):
+        if other == 1:
+            return Cauchy(0, 1/self.scale)
+        elif isinstance(other, (int, float)):
+            return other*Cauchy(0, 1/self.scale)
+        else:
+            raise TypeError(f"Can't divide objects of type {type(other)} by Cauchy")
+
     # TODO: 1 / X --> Cauchy(0, 1/scale)
 
     def to_standard(self):
