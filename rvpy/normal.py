@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import norm
 from . import distribution
-from . import gamma
+from . import gamma, cauchy
 
 class Normal(distribution.Distribution):
     def __init__(self, mu=0, sigma=1):
@@ -40,6 +40,10 @@ class Normal(distribution.Distribution):
     def __truediv__(self, other):
         if isinstance(other, (int, float)) and other != 0:
             return self.__mul__(1 / other)
+        elif isinstance(other, Normal):
+            self.to_standard()
+            other.to_standard()
+            return cauchy.StandardCauchy()
         else:
             raise ZeroDivisionError("Cannot divide a Normal by zero!")
 
@@ -55,9 +59,8 @@ class Normal(distribution.Distribution):
         else:
             raise ValueError("Must be Normal(0, 1) to standardize!")
 
-    # TODO:
-    # __pow__(self, 2) --> ChiSq()
-    # __truediv__ --> Cauchy()
+    def __pow__(self, n):
+        return self.to_standard()**n
 
 class StandardNormal(Normal):
     def __init__(self):

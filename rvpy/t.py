@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import t
 from . import distribution
-from . import f
+from . import f, cauchy
 
 class T(distribution.Distribution):
     def __init__(self, df):
@@ -26,7 +26,11 @@ class T(distribution.Distribution):
         elif k == -2:
             return f.F(self.df, 1)
 
+    def to_cauchy(self):
+        assert self.df == 1, "Can only convert to Cauchy if df == 1"
+        return cauchy.StandardCauchy()
+
+
     # TODO: Fix moments from low df
-    # TODO: to_cauchy() if df == 1
     # TODO: to_noncentral_t()
     # TODO: Throw error with .mgf()

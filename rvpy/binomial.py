@@ -24,9 +24,12 @@ class Binomial(distribution.Distribution):
         return f"Binomial(n={self.n}, p={self.p})"
 
     def __add__(self, Y):
-        assert isinstance(Y, Binomial), "can only add Binomials to Binomials"
         assert self.p == Y.p, "values of p must match in order to add"
-        return Binomial(self.n + Y.n, self.p)
+
+        if isinstance(Y, Binomial):
+            return Binomial(self.n + Y.n, self.p)
+        else:
+            raise TypeError("Can only add Binomials to Binomials")
 
     def mgf(self, t):
         return (self.q + self.p * np.exp(t))**self.n

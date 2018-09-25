@@ -19,5 +19,3 @@ class F(distribution.Distribution):
 
     def __repr__(self):
         return f"F(df1={self.df1}, df2={self.df2})"
-
-    # TODO: sqrt(F(1, df)) --> T(df)

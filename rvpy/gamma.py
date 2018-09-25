@@ -61,14 +61,12 @@ class Exponential(Gamma):
     def __repr__(self):
         return f"Exponential(scale={self.scale})"
 
-    #  def __sub__(self):
-        #  # TODO: X - Y ~ Laplace
+    #  TODO: def __sub__(self):
 
     def to_gamma(self):
         return Gamma(alpha=1, beta=self.scale)
 
-    #  def to_chisq(self):
-        #  # TODO: This
+    #  TODO: def to_chisq(self):
 
 class ChiSq(Gamma):
     def __init__(self, df):
@@ -90,5 +88,4 @@ class ChiSq(Gamma):
     def to_gamma(self):
         return Gamma(alpha=self.df/2, beta=2)
 
-    #  def to_exponential(self):
-        #  # TODO: This
+    #  TODO: def to_exponential(self):

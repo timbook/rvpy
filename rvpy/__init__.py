@@ -7,6 +7,8 @@ from .beta import Beta
 from .t import T
 from .f import F
 from .cauchy import Cauchy, StandardCauchy
+from .poisson import Poisson
+from .duniform import DUniform
 
 __all__ = [
     'Normal', 'StandardNormal',
@@ -16,5 +18,7 @@ __all__ = [
     'Beta',
     'T',
     'F',
-    'Cauchy', 'StandardCauchy'
+    'Cauchy', 'StandardCauchy',
+    'Poisson',
+    'DUniform'
 ]
