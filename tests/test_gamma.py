@@ -13,7 +13,6 @@ class GammaTests(unittest.TestCase):
         self.beta = random.expovariate(1/10)
 
         self.X = rvpy.Gamma(self.alpha1, self.beta)
-
         self.Y = rvpy.Gamma(self.alpha2, self.beta)
 
     def test_gamma_moments(self):
@@ -28,7 +27,11 @@ class GammaTests(unittest.TestCase):
         self.assertIsInstance(U.to_exponential(), rvpy.Exponential)
         self.assertEqual(U.to_exponential().mean, lambd)
 
-        # TODO: .to_chisq()
+        alph = 2*random.randrange(3, 11)
+        V = rvpy.Gamma(alph, 2)
+        self.assertIsInstance(V.to_chisq(), rvpy.ChiSq)
+        self.assertEqual(V.to_chisq().df, 2*alph)
+
 
     def test_gamma_add_sub(self):
         Z = self.X + self.Y

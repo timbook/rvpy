@@ -32,4 +32,5 @@ class PoissonTests(unittest.TestCase):
 
     def test_poi_errors(self):
         with self.assertRaises(AssertionError): rvpy.Poisson(0)
+        with self.assertRaises(AssertionError): rvpy.Poisson(0.5)
         with self.assertRaises(AssertionError): rvpy.Poisson(-1)

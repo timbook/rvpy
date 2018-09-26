@@ -46,8 +46,12 @@ class Gamma(distribution.Distribution):
                )
 
     def to_exponential(self):
-        assert self.alpha == 1, "Alpha must be 1 to downcast"
+        assert self.alpha == 1, "Alpha must be 1 to downcast to Exponential"
         return Exponential(self.beta)
+
+    def to_chisq(self):
+        assert self.beta == 2 ,"Beta must be 2 to downcast to ChiSq"
+        return ChiSq(2*self.alpha)
 
 class Exponential(Gamma):
     def __init__(self, scale):
@@ -65,8 +69,6 @@ class Exponential(Gamma):
 
     def to_gamma(self):
         return Gamma(alpha=1, beta=self.scale)
-
-    #  TODO: def to_chisq(self):
 
 class ChiSq(Gamma):
     def __init__(self, df):
@@ -87,5 +89,3 @@ class ChiSq(Gamma):
 
     def to_gamma(self):
         return Gamma(alpha=self.df/2, beta=2)
-
-    #  TODO: def to_exponential(self):
