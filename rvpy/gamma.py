@@ -65,10 +65,19 @@ class Exponential(Gamma):
     def __repr__(self):
         return f"Exponential(scale={self.scale})"
 
-    #  TODO: def __sub__(self):
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            return Exponential(other*self.scale)
+        else:
+            raise TypeError("Only multiplication by scalar supported")
+
+    #  TODO: def __sub__(self): -> Laplace
 
     def to_gamma(self):
         return Gamma(alpha=1, beta=self.scale)
+
+    # NOTE: .to_chisq() unnecessary since special case when scale == 2
+    # inherits from Gamma.
 
 class ChiSq(Gamma):
     def __init__(self, df):

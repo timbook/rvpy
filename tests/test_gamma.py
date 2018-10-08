@@ -32,7 +32,6 @@ class GammaTests(unittest.TestCase):
         self.assertIsInstance(V.to_chisq(), rvpy.ChiSq)
         self.assertEqual(V.to_chisq().df, 2*alph)
 
-
     def test_gamma_add_sub(self):
         Z = self.X + self.Y
         self.assertEqual(Z.mean, (self.alpha1 + self.alpha2)*self.beta)
@@ -55,9 +54,98 @@ class GammaTests(unittest.TestCase):
         with self.assertRaises(AssertionError): rvpy.Gamma(1, 0)
         with self.assertRaises(AssertionError): rvpy.Gamma(-1, 1)
         with self.assertRaises(AssertionError): rvpy.Gamma(1, -1)
+        with self.assertRaises(TypeError): rvpy.Gamma(3, 4) + 3
 
 class ExponentialTests(unittest.TestCase):
-    pass
+    def setUp(self):
+        self.beta1 = random.expovariate(1/10)
+        self.beta2 = random.expovariate(1/10)
+        self.alpha1 = random.randint(2, 10)
+        
+        self.E1 = rvpy.Exponential(self.beta1)
+        self.E2 = rvpy.Exponential(self.beta1)
+        self.G1 = rvpy.Gamma(self.alpha1, self.beta1)
+
+    def test_exp_moments(self):
+        self.assertEqual(self.E1.mean, self.beta1)
+        self.assertEqual(self.E1.mean, self.E1.scale)
+        self.assertEqual(self.E1.std, self.E1.scale)
+        self.assertEqual(self.E1.var, self.beta1**2)
+        self.assertEqual(self.E1.skew, 2)
+        self.assertEqual(self.E1.kurtosis, 6)
+
+    def test_exp_conversion(self):
+        E4 = rvpy.Exponential(2)
+
+        self.assertIsInstance(self.E1.to_gamma(), rvpy.Gamma)
+        self.assertIsInstance(E4.to_chisq(), rvpy.ChiSq)
+
+        self.assertEqual(self.E1.to_gamma().mean, self.E1.mean)
+        self.assertEqual(self.E1.to_gamma().var, self.E1.var)
+        self.assertEqual(self.E1.to_gamma().alpha, 1)
+        self.assertEqual(self.E1.to_gamma().beta, self.beta1)
+        self.assertEqual(E4.to_chisq().df, 2)
+
+    def test_exp_add_sub(self):
+        G = self.E1 + self.E2
+        self.assertIsInstance(G, rvpy.Gamma)
+        self.assertEqual(G.alpha, 2)
+        self.assertEqual(G.beta, self.E1.scale)
+
+        H = self.E1 + self.G1
+        self.assertIsInstance(H, rvpy.Gamma)
+        self.assertEqual(H.alpha, self.G1.alpha + 1)
+        self.assertEqual(H.beta, self.G1.beta)
+        self.assertEqual(H.beta, self.E1.scale)
+
+        # TODO: E1 - E2 --> Laplace
+
+    def test_exp_mul_div(self):
+        c = random.randint(1, 10)
+        Emul = c * self.E1
+        Ediv = self.E1 / c
+
+        self.assertIsInstance(Emul, rvpy.Exponential)
+        self.assertAlmostEqual(Emul.mean, c*self.E1.mean)
+
+        self.assertIsInstance(Ediv, rvpy.Exponential)
+        self.assertAlmostEqual(Ediv.mean, self.E1.mean / c)
+
+    def test_exp_errors(self):
+        with self.assertRaises(AssertionError): rvpy.Exponential(0)
+        with self.assertRaises(AssertionError): rvpy.Exponential(-1)
+        with self.assertRaises(TypeError): rvpy.Exponential(3) + 2
+        with self.assertRaises(ValueError):
+            rvpy.Exponential(3) + rvpy.Exponential(4)
+        with self.assertRaises(ValueError):
+            rvpy.Exponential(3) + rvpy.Gamma(2, 4)
+        with self.assertRaises(AssertionError):
+            rvpy.Exponential(3).to_chisq()
 
 class ChiSqTests(unittest.TestCase):
-    pass
+    def setUp(self):
+        pass
+
+    def test_chisq_moments(self):
+        pass
+
+    def test_chisq_conversion(self):
+        pass
+
+    def test_chisq_add_sub(self):
+        pass
+
+    def test_chisq_mul_div(self):
+        pass
+
+    def test_chisq_errors(self):
+        pass
+
+
+
+
+
+
+
+
+
