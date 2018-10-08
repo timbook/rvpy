@@ -50,7 +50,7 @@ class Gamma(distribution.Distribution):
         return Exponential(self.beta)
 
     def to_chisq(self):
-        assert self.beta == 2 ,"Beta must be 2 to downcast to ChiSq"
+        assert self.beta == 2, "Beta must be 2 to downcast to ChiSq"
         return ChiSq(2*self.alpha)
 
 class Exponential(Gamma):
@@ -81,6 +81,7 @@ class Exponential(Gamma):
 
 class ChiSq(Gamma):
     def __init__(self, df):
+        assert isinstance(df, int), "Only integer degrees of freedome allowed."
         # Get Gamma distribution initialization
         super().__init__(alpha=df/2, beta=2)
 
@@ -98,3 +99,6 @@ class ChiSq(Gamma):
 
     def to_gamma(self):
         return Gamma(alpha=self.df/2, beta=2)
+
+    # NOTE: .to_exponential() unnecessary since case when df == 2
+    # inherits from Gamma.

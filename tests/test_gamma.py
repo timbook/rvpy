@@ -101,7 +101,7 @@ class ExponentialTests(unittest.TestCase):
         # TODO: E1 - E2 --> Laplace
 
     def test_exp_mul_div(self):
-        c = random.randint(1, 10)
+        c = random.expovariate(1/10)
         Emul = c * self.E1
         Ediv = self.E1 / c
 
@@ -124,24 +124,59 @@ class ExponentialTests(unittest.TestCase):
 
 class ChiSqTests(unittest.TestCase):
     def setUp(self):
-        pass
+        self.C1 = rvpy.ChiSq(2)
+        self.C2 = rvpy.ChiSq(random.randint(3, 10))
 
     def test_chisq_moments(self):
-        pass
+        self.assertEqual(self.C1.mean, self.C1.df)
+        self.assertEqual(self.C1.var, 2*self.C1.df)
+        self.assertAlmostEqual(self.C1.skew, (8/self.C1.df)**0.5)
+        self.assertAlmostEqual(self.C1.kurtosis, 12/self.C1.df)
 
     def test_chisq_conversion(self):
-        pass
+        Cexp = self.C1.to_exponential()
+        self.assertIsInstance(Cexp, rvpy.Exponential)
+        self.assertEqual(Cexp.scale, 2)
+
+        Cgamma = self.C2.to_gamma()
+        self.assertIsInstance(Cgamma, rvpy.Gamma)
+        self.assertEqual(Cgamma.alpha, self.C2.df/2)
+        self.assertEqual(Cgamma.beta, 2)
 
     def test_chisq_add_sub(self):
-        pass
+        Cadd = self.C1 + self.C2
+        self.assertIsInstance(Cadd, rvpy.ChiSq)
+        self.assertEqual(Cadd.df, self.C1.df + self.C2.df)
+
+        Z = rvpy.StandardNormal()
+        Cpnorm = self.C2 + Z**2
+        self.assertIsInstance(Cpnorm, rvpy.ChiSq)
+        self.assertEqual(Cpnorm.df, self.C2.df + 1)
 
     def test_chisq_mul_div(self):
-        pass
+        c = random.expovariate(1/10)
+
+        Cmul = c * self.C2
+        self.assertIsInstance(Cmul, rvpy.Gamma)
+        self.assertNotIsInstance(Cmul, rvpy.ChiSq)
+        self.assertEqual(Cmul.alpha, self.C2.df / 2)
+        self.assertEqual(Cmul.beta, 2*c)
+
+        Cdiv = self.C2 / c
+        self.assertIsInstance(Cdiv, rvpy.Gamma)
+        self.assertNotIsInstance(Cdiv, rvpy.ChiSq)
+        self.assertEqual(Cmul.alpha, self.C2.df / 2)
+        self.assertEqual(Cdiv.beta, 2/c)
 
     def test_chisq_errors(self):
-        pass
-
-
+        with self.assertRaises(AssertionError): rvpy.ChiSq(0)
+        with self.assertRaises(AssertionError): rvpy.ChiSq(-1)
+        with self.assertRaises(AssertionError): rvpy.ChiSq(0.5)
+        with self.assertRaises(TypeError): rvpy.ChiSq(3) + 2
+        with self.assertRaises(ValueError):
+            rvpy.ChiSq(3) + rvpy.Exponential(4)
+        with self.assertRaises(AssertionError):
+            rvpy.ChiSq(3).to_exponential()
 
 
 
