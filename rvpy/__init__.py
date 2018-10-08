@@ -9,6 +9,7 @@ from .f import F
 from .cauchy import Cauchy, StandardCauchy
 from .poisson import Poisson
 from .duniform import DUniform
+from .laplace import Laplace
 
 __all__ = [
     'Normal', 'StandardNormal',
@@ -18,6 +19,7 @@ __all__ = [
     'Beta',
     'T',
     'F',
+    'Laplace',
     'Cauchy', 'StandardCauchy',
     'Poisson',
     'DUniform'

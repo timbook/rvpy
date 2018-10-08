@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.stats import gamma
-from . import distribution
+from . import distribution, laplace
 
 class Gamma(distribution.Distribution):
     def __init__(self, alpha, beta):
@@ -26,6 +26,18 @@ class Gamma(distribution.Distribution):
                 return Gamma(self.alpha + other.alpha, self.beta)
         else:
             raise TypeError("Only addition/subtraction of Gamma families supported")
+
+    def __sub__(self, other):
+        try:
+            other = other.to_exponential()
+            self.to_exponential()
+        except:
+            raise TypeError("Only subtraction of two Exponential random variables currently supported")
+
+        if other.scale == self.to_exponential().scale:
+            return laplace.Laplace(0, other.scale)
+        else:
+            raise TypeError("Difference of Exponentials must share scale parameter")
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
