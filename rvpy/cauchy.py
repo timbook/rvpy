@@ -43,7 +43,7 @@ class Cauchy(distribution.Distribution):
             raise TypeError(f"Can't multiply objects of type {type(other)} to Cauchy")
 
     def __truediv__(self, other):
-        self.__mul__(1/other)
+        return self.__mul__(1/other)
 
     def __rtruediv__(self, other):
         assert self.loc == 0, 'Can only invert Cauchy distributions with location 0'
@@ -55,7 +55,7 @@ class Cauchy(distribution.Distribution):
             raise TypeError(f"Can't divide objects of type {type(other)} by Cauchy")
 
     def to_standard(self):
-        assert self.loc == 0 and self.scale == 1,\
+        assert self.loc == 0 and self.scale == 1, \
                 "Must have Cauchy(0, 1) to convert to StandardCauchy"
         return StandardCauchy()
 
