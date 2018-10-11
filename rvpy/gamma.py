@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.stats import gamma
-from . import distribution, laplace
+from . import distribution, laplace, weibull
 
 class Gamma(distribution.Distribution):
     def __init__(self, alpha, beta):
@@ -83,7 +83,8 @@ class Exponential(Gamma):
         else:
             raise TypeError("Only multiplication by scalar supported")
 
-    #  TODO: def __sub__(self): -> Laplace
+    # TODO: def __sub__(self): -> Laplace
+    # TODO: def __pow__(self): -> Weibull
 
     def to_gamma(self):
         return Gamma(alpha=1, beta=self.scale)

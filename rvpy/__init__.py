@@ -10,6 +10,7 @@ from .cauchy import Cauchy, StandardCauchy
 from .poisson import Poisson
 from .duniform import DUniform
 from .laplace import Laplace
+from .weibull import Weibull, Rayleigh
 
 __all__ = [
     'Normal', 'StandardNormal',
