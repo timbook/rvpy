@@ -24,18 +24,17 @@ class Binomial(distribution.Distribution):
         return f"Binomial(n={self.n}, p={self.p})"
 
     def __add__(self, Y):
-        assert self.p == Y.p, "values of p must match in order to add"
-
-        if isinstance(Y, Binomial):
+        if isinstance(Y, Binomial) and self.p == Y.p:
             return Binomial(self.n + Y.n, self.p)
         else:
-            raise TypeError("Can only add Binomials to Binomials")
+            raise TypeError("Can only add Binomials or Benoulli to Binomials")
 
     def mgf(self, t):
         return (self.q + self.p * np.exp(t))**self.n
 
     def to_bernoulli(self):
-        assert self.n == 1, "Must have n == 1 to convert to downcast to Bernoulli"
+        assert self.n == 1, \
+                "Must have n == 1 to convert to downcast to Bernoulli"
         return Bernoulli(self.p)
 
 class Bernoulli(Binomial):

@@ -11,6 +11,7 @@ from .poisson import Poisson
 from .duniform import DUniform
 from .laplace import Laplace
 from .weibull import Weibull, Rayleigh
+from .negbin import NegativeBinomial, Geometric
 
 __all__ = [
     'Normal', 'StandardNormal',
@@ -23,5 +24,7 @@ __all__ = [
     'Laplace',
     'Cauchy', 'StandardCauchy',
     'Poisson',
-    'DUniform'
+    'DUniform',
+    'Weibull', 'Rayleigh',
+    'NegativeBinomial', 'Geometric'
 ]

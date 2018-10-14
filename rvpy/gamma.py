@@ -85,6 +85,7 @@ class Exponential(Gamma):
 
     # TODO: def __sub__(self): -> Laplace
     # TODO: def __pow__(self): -> Weibull
+    # TODO: sqrt --> Rayleigh
 
     def to_gamma(self):
         return Gamma(alpha=1, beta=self.scale)
