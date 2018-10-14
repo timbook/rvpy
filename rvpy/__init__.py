@@ -12,6 +12,7 @@ from .duniform import DUniform
 from .laplace import Laplace
 from .weibull import Weibull, Rayleigh
 from .negbin import NegativeBinomial, Geometric
+from .hypergeom import Hypergeometric
 
 __all__ = [
     'Normal', 'StandardNormal',
@@ -26,5 +27,6 @@ __all__ = [
     'Poisson',
     'DUniform',
     'Weibull', 'Rayleigh',
-    'NegativeBinomial', 'Geometric'
+    'NegativeBinomial', 'Geometric',
+    'Hypergeometric'
 ]

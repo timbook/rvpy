@@ -71,7 +71,6 @@ class BinomialTests(unittest.TestCase):
         ber_list = [rvpy.Bernoulli(p_ber) for _ in range(n_ber)]
         ber_cum = ber_list[0]
         for i in range(1, n_ber):
-            # TODO: Switch to iadd
             ber_cum = ber_cum + ber_list[i]
 
         self.assertEqual(ber_cum.p, p_ber)
