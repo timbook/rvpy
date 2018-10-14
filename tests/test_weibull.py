@@ -2,6 +2,7 @@ import unittest
 import sys
 import random
 from scipy.special import gamma as G
+from math import sqrt, pi
 
 sys.path.append('..')
 
@@ -40,13 +41,30 @@ class WeibullTests(unittest.TestCase):
 
 class RayleighTests(unittest.TestCase):
     def setUp(self):
-        pass
+        self.X = rvpy.Rayleigh(random.expovariate(1/10))
 
     def test_rayleigh_moments(self):
-        pass
+        v = sqrt(pi / 2)
+        self.assertAlmostEqual(self.X.mean, self.X.scale * v)
+        self.assertAlmostEqual(self.X.var, (4 - pi)/2 * self.X.scale**2)
 
     def test_rayleigh_conversion(self):
-        pass
+        Xweib = self.X.to_weibull()
+        self.assertIsInstance(Xweib, rvpy.Weibull)
+        self.assertEqual(Xweib.mean, self.X.mean)
+
+        # TODO: Xgamma = X**2
+        # TODO: Xchisq = X(1)**2
 
     def test_rayleigh_errors(self):
-        pass
+        with self.assertRaises(AssertionError): rvpy.Rayleigh(0)
+        with self.assertRaises(AssertionError): rvpy.Rayleigh(-1)
+
+    
+
+
+
+
+
+
+

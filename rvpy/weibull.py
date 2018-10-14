@@ -47,3 +47,8 @@ class Rayleigh(Weibull):
 
     def to_weibull(self):
         return Weibull(2, self.scale * 2**0.5)
+
+    # def __pow__(self, k):
+        # TODO: Rayleigh(s)**2 --> Gamma(1, 2s**2)
+        # TODO: Rayleigh(1)**2 --> ChiSq(2)
+
