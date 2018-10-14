@@ -117,19 +117,3 @@ class NormalTests(unittest.TestCase):
 
         # Negative sigmas not allowed
         with self.assertRaises(AssertionError): rvpy.Normal(0, -1)
-
-        # Can't add normal to incompatible types
-        other_dists = [
-            rvpy.Bernoulli(random.random()),
-            rvpy.Binomial(random.randint(2, 10), random.random()),
-            rvpy.CUniform(),
-            rvpy.F(3, 5),
-            rvpy.Gamma(3, 2),
-            rvpy.Exponential(5),
-            rvpy.ChiSq(3),
-            rvpy.T(3)
-        ]
-        for od in other_dists:
-            with self.assertRaises(TypeError):
-                W = od
-                self.X + W

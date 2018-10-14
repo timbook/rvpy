@@ -29,7 +29,7 @@ testDist() {
 if [[ $# -eq 0 ]]; then
     dists=( \
         "normal" "binomial" "cuniform" "beta" "t" "f" "gamma" "poisson" \
-        "cauchy" "laplace" "duniform" "weibull" \
+        "cauchy" "laplace" "duniform" "weibull" "negbin" \
         )
     for dist in ${dists[@]}
     do

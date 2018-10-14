@@ -25,13 +25,13 @@ class WeibullTests(unittest.TestCase):
     def test_weibull_conversion(self):
         Xexp = self.X.to_exponential()
         self.assertIsInstance(Xexp, rvpy.Exponential)
-        self.assertEqual(Xexp.mean, self.X.mean)
-        self.assertEqual(Xexp.var, self.X.var)
+        self.assertAlmostEqual(Xexp.mean, self.X.mean)
+        self.assertAlmostEqual(Xexp.var, self.X.var)
 
         Yray = self.Y.to_rayleigh()
         self.assertIsInstance(Yray, rvpy.Rayleigh)
-        self.assertEqual(Yray.mean, self.Y.mean)
-        self.assertEqual(Yray.var, self.Y.var)
+        self.assertAlmostEqual(Yray.mean, self.Y.mean)
+        self.assertAlmostEqual(Yray.var, self.Y.var)
 
     def test_weibull_errors(self):
         with self.assertRaises(AssertionError): rvpy.Weibull(0, 3)

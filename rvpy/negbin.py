@@ -39,4 +39,4 @@ class Geometric(NegativeBinomial):
         return f"Geometric(p={self.p})"
 
     def to_negative_binomial(self):
-        return NegativeBinomial(n=1, p=self.p)
+        return NegativeBinomial(r=1, p=self.p)
