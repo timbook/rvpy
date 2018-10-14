@@ -92,6 +92,8 @@ class LogNormal(distribution.Distribution):
         # Scipy backend
         self.sp = lognorm(s=sigma, scale=np.exp(mu))
 
+        super().__init__()
+
     def __repr__(self):
         return f"LogNormal(mu={self.mu}, sigma={self.sigma})"
 
