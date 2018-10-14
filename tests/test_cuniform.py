@@ -127,20 +127,3 @@ class CUniformTests(unittest.TestCase):
         with self.assertRaises(AssertionError): rvpy.CUniform(1, 1)
         with self.assertRaises(TypeError): self.V.to_beta()
         with self.assertRaises(TypeError): self.V**3
-
-        # Can't add other dists to cuniform
-        other_dists = [
-            rvpy.Bernoulli(0.3),
-            rvpy.Binomial(5, 0.4),
-            rvpy.CUniform(),
-            rvpy.F(3, 5),
-            rvpy.Gamma(3, 2),
-            rvpy.Exponential(5),
-            rvpy.ChiSq(3),
-            rvpy.T(3)
-        ]
-        for od in other_dists:
-            with self.assertRaises(TypeError):
-                W = od
-                self.V + W
-

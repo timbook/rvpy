@@ -6,6 +6,7 @@ class DUniform(distribution.Distribution):
     def __init__(self, a, b):
         assert isinstance(a, int) and isinstance(b, int), \
                 "DUniform bounds must be integers"
+        assert a < b, "a must be less than b"
 
         # Parameters
         self.a = a
@@ -25,3 +26,5 @@ class DUniform(distribution.Distribution):
                 "Only adding integers to DUniform is supported"
 
         return DUniform(self.a + c, self.b + c)
+
+    # TODO: __neg__?
