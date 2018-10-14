@@ -1,5 +1,5 @@
 from .distribution import Distribution
-from .normal import Normal, StandardNormal
+from .normal import Normal, StandardNormal, LogNormal
 from .binomial import Bernoulli, Binomial
 from .cuniform import CUniform
 from .gamma import Gamma, Exponential, ChiSq
@@ -15,7 +15,7 @@ from .negbin import NegativeBinomial, Geometric
 from .hypergeom import Hypergeometric
 
 __all__ = [
-    'Normal', 'StandardNormal',
+    'Normal', 'StandardNormal', "LogNormal",
     'Bernoulli', 'Binomial',
     'CUniform',
     'Gamma', 'ChiSq', 'Exponential'

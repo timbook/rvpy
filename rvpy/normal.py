@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.stats import norm
+from scipy.stats import norm, lognorm
 from . import distribution
 from . import gamma, cauchy
 
@@ -49,6 +49,12 @@ class Normal(distribution.Distribution):
 
     def __neg__(self):
         return Normal(-self.mu, self.sigma)
+    
+    def __pow__(self, n):
+        return self.to_standard()**n
+
+    def exp(self):
+        return LogNormal(self.mu, self.sigma)
 
     def mgf(self, t):
         return np.exp(t*self.mu + 0.5*(t**2)*(self.var))
@@ -59,8 +65,6 @@ class Normal(distribution.Distribution):
         else:
             raise ValueError("Must be Normal(0, 1) to standardize!")
 
-    def __pow__(self, n):
-        return self.to_standard()**n
 
 class StandardNormal(Normal):
     def __init__(self):
@@ -70,9 +74,51 @@ class StandardNormal(Normal):
     def __repr__(self):
         return f"StandardNormal(mu=0, sigma=1)"
 
-    def to_nonstandard(self):
-        return Normal(mu=0, sigma=1)
-
     def __pow__(self, k):
         assert k == 2, "Only squaring standard normal is supportd"
         return gamma.ChiSq(1)
+
+    def to_nonstandard(self):
+        return Normal(mu=0, sigma=1)
+
+class LogNormal(distribution.Distribution):
+    def __init__(self, mu=0, sigma=1):
+        assert sigma > 0, "sigma must be positive"
+
+        # Parameters
+        self.mu = mu
+        self.sigma = sigma
+
+        # Scipy backend
+        self.sp = lognorm(s=sigma, scale=np.exp(mu))
+
+    def __repr__(self):
+        return f"LogNormal(mu={self.mu}, sigma={self.sigma})"
+
+    def log(self):
+        return Normal(self.mu, self.sigma)
+
+    def __mul__(self, other):
+        if isinstance(other, LogNormal):
+            return LogNormal(self.mu + other.mu, self.sigma + other.sigma)
+        elif isinstance(other, (int, float)):
+            return LogNormal(self.mu + np.log(other), self.sigma)
+        else:
+            raise TypeError(f"Multiplication of LogNormal by {type(other)} not supported.")
+
+    def __truediv__(self, c):
+            return self.__mul__(1/c)
+
+    def __rtruediv__(self, c):
+        if isinstance(c, (int, float)):
+            return c*LogNormal(-self.mu, self.sigma)
+        else:
+            raise TypeError(f"__rtruediv__ of LogNormal by {type(c)} not supported.")
+
+    def __pow__(self, k):
+        if isinstance(k, (int, float)) and k != 0:
+            return LogNormal(k*self.mu, abs(k)*self.sigma)
+        elif isinstance(k, (int, float)) and k == 0:
+            raise TypeError("Exponent to LogNormal must be nonzero.")
+        else:
+            raise TypeError(f"Exponentiation of LogNormal by {type(c)} not supported.")
