@@ -13,6 +13,7 @@ from .laplace import Laplace
 from .weibull import Weibull, Rayleigh
 from .negbin import NegativeBinomial, Geometric
 from .hypergeom import Hypergeometric
+from .pareto import Pareto
 
 __all__ = [
     'Normal', 'StandardNormal', "LogNormal",
@@ -28,5 +29,6 @@ __all__ = [
     'DUniform',
     'Weibull', 'Rayleigh',
     'NegativeBinomial', 'Geometric',
-    'Hypergeometric'
+    'Hypergeometric',
+    'Pareto'
 ]
