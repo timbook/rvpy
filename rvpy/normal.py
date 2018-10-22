@@ -29,7 +29,7 @@ class Normal(distribution.Distribution):
         elif isinstance(other, (int, float)):
             return Normal(self.mu + other, self.sigma)
         else:
-            raise TypeError("Only addition by another (independent) Normal, int, or float supported.")
+            raise TypeError(f"Addiing {type(other)} to Normal not supported")
 
     def __mul__(self, other):
         if isinstance(other, (int, float)):
@@ -106,7 +106,7 @@ class LogNormal(distribution.Distribution):
         elif isinstance(other, (int, float)):
             return LogNormal(self.mu + np.log(other), self.sigma)
         else:
-            raise TypeError(f"Multiplication of LogNormal by {type(other)} not supported.")
+            raise TypeError(f"Multiplying LogNormal by {type(other)} not supported.")
 
     def __truediv__(self, c):
             return self.__mul__(1/c)
@@ -119,8 +119,9 @@ class LogNormal(distribution.Distribution):
 
     def __pow__(self, k):
         if isinstance(k, (int, float)) and k != 0:
-            return LogNormal(k*self.mu, abs(k)*self.sigma)
-        elif isinstance(k, (int, float)) and k == 0:
-            raise TypeError("Exponent to LogNormal must be nonzero.")
+            if k != 0:
+                return LogNormal(k*self.mu, abs(k)*self.sigma)
+            else:
+                raise ValueError("Exponent to LogNormal must be nonzero.")
         else:
             raise TypeError(f"Exponentiation of LogNormal by {type(c)} not supported.")
