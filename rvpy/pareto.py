@@ -12,7 +12,7 @@ class Pareto(distribution.Distribution):
         self.beta = beta
 
         # Scipy backend
-        self.sp = pareto(b=alpha, scale=beta)
+        self.sp = pareto(b=beta, scale=alpha)
 
         # Initialize super
         super().__init__()
