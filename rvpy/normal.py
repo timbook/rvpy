@@ -104,7 +104,10 @@ class LogNormal(distribution.Distribution):
         if isinstance(other, LogNormal):
             return LogNormal(self.mu + other.mu, self.sigma + other.sigma)
         elif isinstance(other, (int, float)):
-            return LogNormal(self.mu + np.log(other), self.sigma)
+            if other == 0:
+                raise TypeError("Can't multiply by 0!")
+            else:
+                return LogNormal(self.mu + np.log(other), self.sigma)
         else:
             raise TypeError(f"Multiplying LogNormal by {type(other)} not supported.")
 
@@ -124,4 +127,4 @@ class LogNormal(distribution.Distribution):
             else:
                 raise ValueError("Exponent to LogNormal must be nonzero.")
         else:
-            raise TypeError(f"Exponentiation of LogNormal by {type(c)} not supported.")
+            raise TypeError(f"Exponentiation of LogNormal by {type(k)} not supported.")
