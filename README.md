@@ -16,11 +16,25 @@ Normal(mu=3, sigma=5.0990195135927845)
 ChiSq(df=1)
 ```
 
+## Installation:
+`rvpy` is available on PyPI and can easily be installed via
+
+```bash
+pip install rvpy
+```
+To install the version currently hosted here, simply clone and install locally:
+
+```bash
+git clone git@github.com:timbook/rvpy.git
+cd rvpy
+pip install .
+```
+
 ## TODO:
-* Documentation
-* setup.py
+* Documentation, any at all.
+* Some network/graph or master resource for discovering relationships between distributions
 * Various more distributions to add
-* Some graph or master resource for discovering relationships between distributions
+* Move a fuller list of TODOs to a `TODO.md` file.
 
 ## Future ideas:
 * `fit()` methods for each RV (choice of `"MLE"`, `"MOM"`?)
