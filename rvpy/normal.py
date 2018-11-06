@@ -22,7 +22,7 @@ class Normal(distribution.Distribution):
         Converts self to StandardNormal if (mu, sigma) == (0, 1)
     exp()
         Exponentiate self to yield LogNormal(mu, sigma)
-    mgf()
+    mgf(t)
         Moment generating function
 
     Relationships
@@ -116,6 +116,8 @@ class StandardNormal(Normal):
     -------
     to_nonstandard()
         Converts self to Normal(0, 1) 
+    mgf(t)
+        Moment generating function
 
     Relationships
     -------------
