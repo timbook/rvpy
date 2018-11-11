@@ -4,7 +4,42 @@ from . import distribution
 from . import t
 
 class Cauchy(distribution.Distribution):
+    """
+    Cauchy Distribution using the following parameterization:
+
+    f(x | loc, scale) = 1 / (pi * scale * (1 + ((x - loc) / scale)**2))
+
+    Parameters
+    ----------
+    loc : float
+        Location parameter
+    scale : float, positive
+        Scale parameter
+
+    Methods
+    -------
+    to_standard()
+        Converts self to StandardCauchy if (loc, scale) == (0, 1)
+    to_t()
+        Converts self to T if (loc, scale) == (0, 1)
+
+    Relationships
+    -------------
+    Let X, Y be Cauchy, c float. Then:
+    * X + Y, X - Y are Cauchy
+    * cX is Cauchy
+    * 1/X is Cauchy
+    * If X as parameters (0, 1), is StandardCauchy and T(1)
+    """
     def __init__(self, loc=0, scale=1):
+        """
+        Parameters
+        ----------
+        loc : float
+            Location parameter
+        scale : float, positive
+            Scale parameter
+        """
         assert scale > 0, "scale parameter must be positive"
 
         # Parameters
@@ -63,6 +98,22 @@ class Cauchy(distribution.Distribution):
         return self.to_standard().to_t()
 
 class StandardCauchy(Cauchy):
+    """
+    Standard Cauchy Distribution using the following parameterization:
+
+    f(x) = 1 / (pi * (1 + x**2)
+
+    Methods
+    -------
+    to_nonstandard()
+        Converts self to Cauchy(0, 1)
+    to_t()
+        Converts self to T(1)
+
+    Relationships
+    -------------
+    Let X be StandardCauchy. Then:
+    """
     def __init__(self):
         super().__init__(0, 1)
 
