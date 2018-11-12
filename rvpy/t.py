@@ -4,7 +4,32 @@ from . import distribution
 from . import f, cauchy
 
 class T(distribution.Distribution):
+    """
+    Student's T Distribution
+
+    Parameters
+    ----------
+    df : float, positive (usually integer)
+        Degrees of freedom
+
+    Methods
+    -------
+    to_cauchy()
+        Converts to StandardCauchy if df == 1
+
+    Relationships
+    -------------
+    Let X be T-distributed
+    * X**2 is F-distributed
+    * 1 / X**2 is F-distributed
+    """
     def __init__(self, df):
+        """
+        Parameters
+        ----------
+        df : float, positive (usually integer)
+            Degrees of freedom
+        """
         assert df > 0, "df must be positive"
 
         # Parameters
