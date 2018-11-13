@@ -74,7 +74,7 @@ class CauchyTests(unittest.TestCase):
 
     def test_cauchy_mul_div(self):
         c = random.randint(-10, 10)
-        c = c if c != else 1
+        c = c if c != 0 else 1
 
         Ymul = c * self.Y
         self.assertIsInstance(Ymul, rvpy.Cauchy)
