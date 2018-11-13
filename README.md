@@ -31,10 +31,6 @@ pip install .
 ```
 
 ## TODO:
-* **CURRENT DEVELOPMENT FOCUS**: Documentation.
-    - See `docs` branch for latest.
-* Some network/graph or master resource for discovering relationships between distributions
-    - Right now, details regarding this are going in class docstrings
 * Various more distributions to add
     - Gumbel, Beta-Binoial, Gompertz, Logistic
 * Move a fuller list of TODOs to a `TODO.md` file.
