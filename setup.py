@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name="rvpy",
-      version="0.1",
+      version="0.2",
       description="Working with random variables in an OOish way.",
       url="https://github.com/timbook/rvpy",
       author="Tim Book",

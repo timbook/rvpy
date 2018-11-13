@@ -4,7 +4,33 @@ from . import distribution
 from . import t
 
 class F(distribution.Distribution):
+    """
+    Snedecor's F Distribution
+
+    Parameters
+    ----------
+    df1 : float, positive
+        Numerator degrees of freedom
+    df2 : float, positive
+        Denominator degrees of freedom
+
+    Methods
+    -------
+    None
+
+    Relationships
+    -------------
+    None implemented
+    """
     def __init__(self, df1, df2):
+        """
+        Parameters
+        ----------
+        df1 : float, positive
+            Numerator degrees of freedom
+        df2 : float, positive
+            Denominator degrees of freedom
+        """
         assert df1 > 0 and df2 > 0, "degrees of freedom must be positive"
 
         # Parameters

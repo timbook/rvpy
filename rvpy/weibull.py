@@ -4,7 +4,40 @@ from . import distribution
 from . import gamma as gamm
 
 class Weibull(distribution.Distribution):
+    """
+    Weibull Distribution using the following parameterization:
+
+    f(x | gamma, beta) = gamma/beta * x**(gamma - 1) * exp(-x**gamma / beta)
+
+    Parameters
+    ----------
+    gamma : float, positive
+        Shape parameter
+    beta : float, positive
+        Scale parameter
+
+    Methods
+    -------
+    to_exponential()
+        Converts self to Exponential if gamma == 1
+    to_rayleigh()
+        Converts self to Rayleigh if gamma == 2
+
+    Relationships
+    -------------
+    Let X be Weibull. Then:
+    * X is also Exponential if gamma == 1
+    * X is also Rayleigh if gamma == 2
+    """
     def __init__(self, gamma, beta):
+        """
+        Parameters
+        ----------
+        gamma : float, positive
+            Shape parameter
+        beta : float, positive
+            Scale parameter
+        """
         assert gamma > 0 and beta > 0, "gamma and beta must be positive"
 
         self.gamma = gamma
@@ -30,7 +63,35 @@ class Weibull(distribution.Distribution):
     # TODO: .to_gumbel() --> ???
 
 class Rayleigh(Weibull):
+    """
+    Rayleigh Distribution using the following parameterization:
+
+    f(x | scale) = x / scale**2 * exp(-x**2 / (2scale**2))
+
+    Parameters
+    ----------
+    scale : float, positive
+        Scale parameter
+
+    Methods
+    -------
+    to_weibull()
+        Converts self to Weibull
+
+    Relationships
+    -------------
+    Let X be Rayleigh. Then:
+    * X is also Weibull
+    * X**2 is Gamma (not yet implemented)
+    * X**2 is ChiSquare if scale == 1 (not yet implemented)
+    """
     def __init__(self, scale):
+        """
+        Parameters
+        ----------
+        scale : float, positive
+            Scale parameter
+        """
         assert scale > 0, "scale parameter must be positive"
 
         self.scale = scale

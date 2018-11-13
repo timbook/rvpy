@@ -1,4 +1,25 @@
 class Distribution:
+    """
+    This is the base Distribution class from which all other univariate
+    distributions inherit. Each subclass also calls the __init__ method herein,
+    which gives the sublcasses their moments, median, and entropy.
+
+    Methods
+    -------
+    pdf(x)
+        If continuous, returns the pdf at point x
+    pmf(x)
+        If discrete, returns the pmf at point x
+    cdf(x)
+        Returns CDF at point x
+    prob_interval(a, b)
+        For a random variable X, returns P(a <= X < b). This is equivalent to
+        cdf(b) - cdf(a)
+    quantile(x)
+        Returns the xth quantile of the random variable
+    sample(*shape)
+        Returns a random sampling of the random variable of the given shape
+    """
     def __init__(self):
         self._moments()
 
@@ -45,4 +66,3 @@ class Distribution:
 
     def sample(self, *shape):
         return self.sp.rvs(size=shape)
-        

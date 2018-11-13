@@ -3,7 +3,42 @@ from scipy.stats import gamma
 from . import distribution, laplace, weibull
 
 class Gamma(distribution.Distribution):
+    """
+    Gamma Distribution using the following parameterization:
+
+    f(x | alpha, beta) = 1 / (beta**alpha * Gamma(alpha)) * x**(alpha - 1) * exp(-x / beta)
+
+    Parameters
+    ----------
+    alpha : float, positive
+        Shape parameter
+    beta : float, positive
+        Scale parameter
+
+    Methods
+    -------
+    to_exponential()
+        Converts self to Exponential if alpha == 1
+    to_chisq()
+        Converts self to ChiSq if beta == 2
+    mgf(t)
+        Moment generating function
+
+    Relationships
+    -------------
+    Let X, Y be Gamma, c float. Then:
+    * X + Y is Gamma if betas match
+    * cX is Gamma
+    """
     def __init__(self, alpha, beta):
+        """
+        Parameters
+        ----------
+        alpha : float, positive
+            Shape parameter
+        beta : float, positive
+            Scale parameter
+        """
         assert alpha > 0 and beta > 0, "alpha and beta must be positive"
 
         self.alpha = alpha
@@ -66,7 +101,37 @@ class Gamma(distribution.Distribution):
         return ChiSq(2*self.alpha)
 
 class Exponential(Gamma):
+    """
+    Exponential Distribution using the following parameterization:
+
+    f(x | scale) = 1 / scale * exp(-x / scale)
+
+    Parameters
+    ----------
+    scale : float, positive
+        Scale parameter
+
+    Methods
+    -------
+    to_gamma()
+        Converts self to Gamma
+
+    Relationships
+    -------------
+    Let X, Y be Exponential, c float. Then:
+    * X + Y is Gamma if scale parameters match
+    * X - Y is Laplace (not yet implemented)
+    * X**c is Weibull (not yet implemented)
+    * sqrt(X) is Rayleigh (not yet implemented)
+    * cX is Exponential
+    """
     def __init__(self, scale):
+        """
+        Parameters
+        ----------
+        scale : float, positive
+            Scale parameter
+        """
         # Get Gamma distribution initialization
         super().__init__(1, scale)
 
@@ -94,7 +159,35 @@ class Exponential(Gamma):
     # inherits from Gamma.
 
 class ChiSq(Gamma):
+    """
+    Chi Square Distribution using the following parameterization:
+
+    f(x | df) = 1 / (2**(df/2) * Gamma(k/2)) * x**(k/2 - 1) * exp(-x/2)
+
+    Parameters
+    ----------
+    df : integer, positive
+        Degrees of freedom
+
+    Methods
+    -------
+    to_gamma()
+        Converts self to Gamma
+    to_exponential()
+        Converts self to Exponential when df == 2
+
+    Relationships
+    -------------
+    Let X, Y be Chi Squared. Then:
+    * X + Y is Chi Squared
+    """
     def __init__(self, df):
+        """
+        Parameters
+        ----------
+        df : integer, positive
+            Degrees of freedom
+        """
         assert isinstance(df, int), "Only integer degrees of freedome allowed."
         # Get Gamma distribution initialization
         super().__init__(alpha=df/2, beta=2)

@@ -3,7 +3,38 @@ from scipy.stats import laplace
 from . import distribution, gamma
 
 class Laplace(distribution.Distribution):
+    """
+    Laplace Distribution using the following parameterization:
+
+    f(x | mu, b) = 1 / 2b * exp(-|x - mu| / b)
+
+    Parameters
+    ----------
+    mu : float
+        Location and mean parameter
+    b : float, positive
+        Scale parameter
+
+    Methods
+    -------
+    abs()
+        Returns |self|, which is Exponential
+
+    Relationships
+    -------------
+    Let X be Laplace, c float. Then:
+    * X + c is Laplace
+    * cX is Laplace
+    """
     def __init__(self, mu, b):
+        """
+        Parameters
+        ----------
+        mu : float
+            Location and mean parameter
+        b : float, positive
+            Scale parameter
+        """
         assert b > 0, "b must be positive"
 
         # Parameters

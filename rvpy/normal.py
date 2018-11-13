@@ -4,7 +4,44 @@ from . import distribution
 from . import gamma, cauchy
 
 class Normal(distribution.Distribution):
+    """
+    Univariate Normal Distribution using the following parameterization:
+
+    f(x | mu, sigma) = 1 / sqrt(2 * pi * sigma**2) * exp(-1/2 * (x - mu)**2 / sigma**2)
+
+    Parameters
+    ----------
+    mu : float
+        Location and mean parameter
+    sigma : float, positive
+        Scale and standard devation parameter
+
+    Methods
+    -------
+    to_standard()
+        Converts self to StandardNormal if (mu, sigma) == (0, 1)
+    exp()
+        Exponentiate self to yield LogNormal(mu, sigma)
+    mgf(t)
+        Moment generating function
+
+    Relationships
+    -------------
+    Let X, Y be Normal, c float. Then:
+    * X + Y is Normal
+    * cX is Normal
+    * exp(X) is LogNormal
+    * X/Y is StandardCauchy if X, Y are StandardNormal
+    """
     def __init__(self, mu=0, sigma=1):
+        """
+        Parameters
+        ----------
+        mu : float
+            Location and mean parameter
+        sigma : float, positive
+            Scale and standard devation parameter
+        """
         assert isinstance(mu, (int, float)), "mu must be numeric!"
         assert isinstance(sigma, (int, float)), "sigma must be numeric!"
         assert sigma > 0, "sigma must be positive"
@@ -65,9 +102,34 @@ class Normal(distribution.Distribution):
         else:
             raise ValueError("Must be Normal(0, 1) to standardize!")
 
-
 class StandardNormal(Normal):
+    """
+    Univariate Standard Normal Distribution using the following parameterization:
+
+    f(x | mu, sigma) = 1 / sqrt(2 * pi) * exp(-1/2 * x**2)
+
+    Parameters
+    ----------
+    None
+
+    Methods
+    -------
+    to_nonstandard()
+        Converts self to Normal(0, 1) 
+    mgf(t)
+        Moment generating function
+
+    Relationships
+    -------------
+    Let Z be StandardNormal. In addition to Normal relationships,
+    * Z**2 is ChiSq with df = 1
+    """
     def __init__(self):
+        """
+        Parameters
+        ----------
+        None
+        """
         # Get non-standard Normal distribution initialization
         super().__init__(0, 1)
 
@@ -82,7 +144,41 @@ class StandardNormal(Normal):
         return Normal(mu=0, sigma=1)
 
 class LogNormal(distribution.Distribution):
+    """
+    LogNormal Distribution using the following parameterization:
+
+    f(x | mu, sigma) = 1 / (x * sigma * sqrt(2 * pi)) * exp(-(log(x) - mu)**2 / (2*sigma**2))
+
+    Parameters
+    ----------
+    mu : float
+        Location parameter
+    sigma : float, positive
+        Scale parameter
+
+    Methods
+    -------
+    log()
+        Takes the natural logarithm of self, returning a Normal distribution
+
+    Relationships
+    -------------
+    Let X, Y be LogNormal, c != 0 float, k int. Then,
+    * log(X) is Normal
+    * X*Y is LogNormal
+    * cX is LogNormal
+    * 1/X is LogNormal
+    * X**k is LogNormal
+    """
     def __init__(self, mu=0, sigma=1):
+        """
+        Parameters
+        ----------
+        mu : float
+            Location parameter
+        sigma : float, positive
+            Scale parameter
+        """
         assert sigma > 0, "sigma must be positive"
 
         # Parameters
@@ -112,7 +208,7 @@ class LogNormal(distribution.Distribution):
             raise TypeError(f"Multiplying LogNormal by {type(other)} not supported.")
 
     def __truediv__(self, c):
-            return self.__mul__(1/c)
+        return self.__mul__(1/c)
 
     def __rtruediv__(self, c):
         if isinstance(c, (int, float)):
