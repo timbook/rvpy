@@ -3,7 +3,36 @@ from scipy.stats import pareto
 from . import distribution
 
 class Pareto(distribution.Distribution):
+    """
+    Pareto Distribution using the following parameterization:
+
+    f(x | alpha, beta) = beta * alpha**beta / x**(beta + 1)
+
+    Parameters
+    ----------
+    alpha : float, positive
+        Scale parameter
+    beta : float, positive
+        Shape parameter
+
+    Methods
+    -------
+    None
+
+    Relationships
+    -------------
+    Let X be Pareto with alpha = 1. Then:
+    * log(X) is exponential
+    """
     def __init__(self, alpha, beta):
+        """
+        Parameters
+        ----------
+        alpha : float, positive
+            Scale parameter
+        beta : float, positive
+            Shape parameter
+        """
         assert alpha > 0 and beta > 0, \
                 "alpha and beta parameters must be positive"
 
