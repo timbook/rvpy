@@ -4,7 +4,7 @@
 Random variables (coming soon: random vectors) can be stored as objects to be
 used in several common operations and conversions. `rvpy`'s distributional
 methods (`pdf()`, `cdf()`, etc) are wrapped around `scipy.stats`. Relationships
-between distributions (dunder methods, `to_*()`) are bespoke.
+between distributions (dunder methods, `to_*()`, etc) are bespoke.
 
 ```python
 >>> import rvpy
@@ -31,13 +31,16 @@ pip install .
 ```
 
 ## TODO:
-* Documentation, any at all.
+* **CURRENT DEVELOPMENT FOCUS**: Documentation.
+    - See `docs` branch for latest.
 * Some network/graph or master resource for discovering relationships between distributions
+    - Right now, details regarding this are going in class docstrings
 * Various more distributions to add
+    - Gumbel, Beta-Binoial, Gompertz, Logistic
 * Move a fuller list of TODOs to a `TODO.md` file.
+* A `CONTRIBUTING.md`
 
 ## Future ideas:
 * `fit()` methods for each RV (choice of `"MLE"`, `"MOM"`?)
 * Multivariate distributions
-* Maybe implementing a `.given()` method for conditional distributions
-
+* Implementing a `.given()` method for conditional distributions
