@@ -32,3 +32,5 @@ __all__ = [
     'Hypergeometric',
     'Pareto'
 ]
+
+__version__ = '0.3'

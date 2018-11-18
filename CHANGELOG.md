@@ -3,7 +3,8 @@
 ## 0.3 (Ongoing changes, this branch)
 ### Added
 * This changelog!
-* Added Python 3.6 as package dependency.
+* Python 3.6 as package dependency.
+* `__version__` in `__init__.py`
 
 ## 0.2 (12 Nov 2018)
 ### Added
