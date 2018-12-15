@@ -6,7 +6,10 @@
 * Python 3.6 as package dependency.
 * `__version__` in `__init__.py`.
 * `TODO.md`
+* Transformation functions that tricker class methods (`rvpy.log()`, `rvpy.exp()`, `rvpy.pow()`, etc.)
 * **Logistic distribution**.
+* **Gumbel distribution**.
+* **Gompertz distribution**.
 
 ## 0.2 (12 Nov 2018)
 ### Added

@@ -2,10 +2,7 @@
 
 ## For Upcoming Version (0.3)
 * LogLogistic Distribution
-* Gumbel Distribution
 * Beta-Binomial Distribution
-* Gompertz Distribution
-* Writing transformation functions to trigger object version (log, exp, sqrt, etc)
 
 Achieving the following wish list would probably bring this to 1.0:
 ## Future Releases
