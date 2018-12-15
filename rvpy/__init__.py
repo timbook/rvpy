@@ -14,6 +14,7 @@ from .weibull import Weibull, Rayleigh
 from .negbin import NegativeBinomial, Geometric
 from .hypergeom import Hypergeometric
 from .pareto import Pareto
+from .logistic import Logistic
 
 __all__ = [
     'Normal', 'StandardNormal', "LogNormal",
@@ -30,7 +31,8 @@ __all__ = [
     'Weibull', 'Rayleigh',
     'NegativeBinomial', 'Geometric',
     'Hypergeometric',
-    'Pareto'
+    'Pareto',
+    'Logistic'
 ]
 
 __version__ = '0.3'
