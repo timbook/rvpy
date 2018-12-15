@@ -14,13 +14,13 @@ def sqrt(rv):
     """
     Returns the square root of a random variable
     """
-    return rv.sqrt()
+    return rv**0.5
 
-def square(rv):
+def pow(rv, k):
     """
     Returns the square of a random variable
     """
-    return rv**2
+    return rv**k
 
 def abs(rv):
     """

@@ -18,6 +18,8 @@ from .logistic import Logistic
 from .gompertz import Gompertz
 from .gumbel import Gumbel
 
+from .transformations import abs, exp, log, sqrt, pow
+
 __all__ = [
     'Normal', 'StandardNormal', "LogNormal",
     'Bernoulli', 'Binomial',
@@ -36,7 +38,9 @@ __all__ = [
     'Pareto',
     'Logistic',
     'Gompertz',
-    'Gumbel'
+    'Gumbel',
+
+    'abs', 'exp', 'log', 'sqrt', 'pow'
 ]
 
 __version__ = '0.3'
