@@ -6,7 +6,9 @@ class Logistic(distribution.Distribution):
     """
     Logistic Distribution using the following parameterization:
 
-    f(x | loc, scale) = 
+    f(x | loc, scale) = exp(-z) / (s * (1 + exp(-z))^2)
+    
+    where z = (x - loc) / scale
 
     Parameters
     ----------

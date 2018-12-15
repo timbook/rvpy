@@ -15,6 +15,7 @@ from .negbin import NegativeBinomial, Geometric
 from .hypergeom import Hypergeometric
 from .pareto import Pareto
 from .logistic import Logistic
+from .gompertz import Gompertz
 
 __all__ = [
     'Normal', 'StandardNormal', "LogNormal",
@@ -32,7 +33,8 @@ __all__ = [
     'NegativeBinomial', 'Geometric',
     'Hypergeometric',
     'Pareto',
-    'Logistic'
+    'Logistic',
+    'Gompertz'
 ]
 
 __version__ = '0.3'
