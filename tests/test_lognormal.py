@@ -75,17 +75,6 @@ class LogNormalTests(unittest.TestCase):
         self.assertEqual(Yinv.mu, -self.Y.mu)
         self.assertEqual(Yinv.sigma, self.Y.sigma)
 
-        # Exponentiation
-        # NOTE: This usually causes an overflow error. Suppressing warnings
-        #   for testing, but should not be suppressed in real use.
-        a = random.randint(2, 11)
-        with warnings.catch_warnings():
-            warnings.simplefilter('ignore')
-            Ypow = self.Y**a
-            self.assertIsInstance(Ypow, rvpy.LogNormal)
-            self.assertEqual(Ypow.mu, a*self.Y.mu)
-            self.assertEqual(Ypow.sigma, a*self.Y.sigma)
-
     def test_lognormal_conversion(self):
         with self.assertRaises(AssertionError): rvpy.LogNormal(0, 0)
         with self.assertRaises(AssertionError): rvpy.LogNormal(0, -1)

@@ -30,7 +30,7 @@ if [[ $# -eq 0 ]]; then
     dists=( \
         "normal" "binomial" "cuniform" "beta" "t" "f" "gamma" "poisson" \
         "cauchy" "laplace" "duniform" "weibull" "negbin" "hypergeom" \
-        "pareto" "lognormal" "logistic" "gompertz" \
+        "pareto" "lognormal" "logistic" "gompertz" "gumbel" \
         )
     for dist in ${dists[@]}
     do

@@ -16,6 +16,7 @@ from .hypergeom import Hypergeometric
 from .pareto import Pareto
 from .logistic import Logistic
 from .gompertz import Gompertz
+from .gumbel import Gumbel
 
 __all__ = [
     'Normal', 'StandardNormal', "LogNormal",
@@ -34,7 +35,8 @@ __all__ = [
     'Hypergeometric',
     'Pareto',
     'Logistic',
-    'Gompertz'
+    'Gompertz',
+    'Gumbel'
 ]
 
 __version__ = '0.3'
