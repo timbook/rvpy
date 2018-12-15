@@ -29,14 +29,3 @@ git clone git@github.com:timbook/rvpy.git
 cd rvpy
 pip install .
 ```
-
-## TODO:
-* Various more distributions to add
-    - Gumbel, Beta-Binoial, Gompertz, Logistic
-* Move a fuller list of TODOs to a `TODO.md` file.
-* A `CONTRIBUTING.md`
-
-## Future ideas:
-* `fit()` methods for each RV (choice of `"MLE"`, `"MOM"`?)
-* Multivariate distributions
-* Implementing a `.given()` method for conditional distributions

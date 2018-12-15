@@ -4,7 +4,9 @@
 ### Added
 * This changelog!
 * Python 3.6 as package dependency.
-* `__version__` in `__init__.py`
+* `__version__` in `__init__.py`.
+* `TODO.md`
+* **Logistic distribution**.
 
 ## 0.2 (12 Nov 2018)
 ### Added
