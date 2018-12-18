@@ -4,8 +4,32 @@ from scipy.stats import uniform
 from . import distribution
 
 class Degenerate(distribution.Distribution):
-    def __init__(self, k):
+    """
+    Degenerate Distribution using the following parameterization:
 
+    f(x | k) = 1 if x == k, 0 otherwise
+
+    Parameters
+    ----------
+    k : float
+        Location parameter
+
+    Methods
+    -------
+    None
+
+    Relationships
+    -------------
+    Let X be Degenerate, c float. Then:
+    * X + c is Degenerate
+    """
+    def __init__(self, k):
+        """
+        Parameters
+        ----------
+        k : float
+            Location parameter
+        """
         # Parameters
         self.k = k
 
