@@ -17,6 +17,7 @@ from .pareto import Pareto
 from .logistic import Logistic, LogLogistic
 from .gompertz import Gompertz
 from .gumbel import Gumbel
+from .degenerate import Degenerate
 
 from .transformations import abs, exp, log, sqrt, pow
 
@@ -24,7 +25,7 @@ __all__ = [
     'Normal', 'StandardNormal', "LogNormal",
     'Bernoulli', 'Binomial',
     'CUniform',
-    'Gamma', 'ChiSq', 'Exponential'
+    'Gamma', 'ChiSq', 'Exponential',
     'Beta',
     'T',
     'F',
@@ -39,6 +40,7 @@ __all__ = [
     'Logistic', 'LogLogistic',
     'Gompertz',
     'Gumbel',
+    'Degenerate',
 
     'abs', 'exp', 'log', 'sqrt', 'pow'
 ]
