@@ -8,6 +8,7 @@
 * `TODO.md`
 * Transformation functions that tricker class methods (`rvpy.log()`, `rvpy.exp()`, `rvpy.pow()`, etc.)
 * **Logistic distribution**.
+* **Log-Logistic distribution**.
 * **Gumbel distribution**.
 * **Gompertz distribution**.
 

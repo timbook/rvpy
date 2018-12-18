@@ -79,7 +79,7 @@ class LogLogistic(distribution.Distribution):
     """
     LogLogistic Distribution using the following parameterization:
 
-    f(x | alpha, beta) = exp(-z) / (s * (1 + exp(-z))^2)
+    f(x | a, b) = (b/a) * (x/a)^(b-1) / (1 + (x/a)^b)^2
     
     Parameters
     ----------

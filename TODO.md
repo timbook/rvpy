@@ -1,7 +1,6 @@
 # TODO List
 
 ## For Upcoming Version (0.3)
-* LogLogistic Distribution
 * Beta-Binomial Distribution
 
 Achieving the following wish list would probably bring this to 1.0:
