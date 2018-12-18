@@ -1,7 +1,7 @@
 import unittest
 import sys
 import random
-from math import pi
+from math import pi, sin, exp, log
 
 sys.path.append('..')
 
@@ -48,3 +48,38 @@ class LogisticTests(unittest.TestCase):
     def test_logistic_errors(self):
         with self.assertRaises(AssertionError): rvpy.Logistic(0, -1)
         with self.assertRaises(TypeError): rvpy.Logistic(0, 1) + rvpy.Logistic(0, 2)
+
+class LogLogisticTests(unittest.TestCase):
+    def setUp(self):
+        self.a = random.random()
+        self.b = 2 + random.random()
+
+        self.X = rvpy.LogLogistic(self.a, self.b)
+
+    def test_loglogistic_moments(self):
+        self.assertAlmostEqual(
+            self.X.mean,
+            self.a * pi / self.b / sin(pi / self.b)
+        )
+        self.assertAlmostEqual(self.X.median, self.a)
+
+    def test_loglogistic_cdf(self):
+        self.assertEqual(self.X.cdf(-1), 0)
+
+    def test_loglogistic_converstion(self):
+        Y = self.X.log()
+        self.assertAlmostEqual(self.X.median, exp(Y.median))
+        self.assertIsInstance(Y, rvpy.Logistic)
+
+    def test_loglogistic_mul_div(self):
+        k = random.randint(2, 10)
+        Y = k*self.X
+
+        self.assertIsInstance(Y, rvpy.LogLogistic)
+        self.assertEqual(Y.alpha, k*self.X.alpha)
+
+    def test_loglogistic_errors(self):
+        with self.assertRaises(AssertionError): rvpy.LogLogistic(0, 1)
+        with self.assertRaises(AssertionError): rvpy.LogLogistic(1, 0)
+        with self.assertRaises(AssertionError): rvpy.LogLogistic(-1, 1)
+        with self.assertRaises(AssertionError): rvpy.LogLogistic(1, -1)

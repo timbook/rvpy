@@ -1,4 +1,5 @@
 import numpy as np
+from math import log, exp
 from scipy.stats import logistic, fisk
 from . import distribution
 
@@ -70,7 +71,7 @@ class Logistic(distribution.Distribution):
             raise TypeError(f"Can't divide objects of type {type(other)} by Logistic")
 
     def exp(self):
-        return LogLogistic(alpha=np.exp(self.loc), beta=1/self.scale)
+        return LogLogistic(alpha=exp(self.loc), beta=1/self.scale)
 
     # TODO: Gumbel - Gumbel = Logistic
 
