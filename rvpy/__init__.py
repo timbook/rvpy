@@ -14,7 +14,7 @@ from .weibull import Weibull, Rayleigh
 from .negbin import NegativeBinomial, Geometric
 from .hypergeom import Hypergeometric
 from .pareto import Pareto
-from .logistic import Logistic
+from .logistic import Logistic, LogLogistic
 from .gompertz import Gompertz
 from .gumbel import Gumbel
 
@@ -36,7 +36,7 @@ __all__ = [
     'NegativeBinomial', 'Geometric',
     'Hypergeometric',
     'Pareto',
-    'Logistic',
+    'Logistic', 'LogLogistic',
     'Gompertz',
     'Gumbel',
 
