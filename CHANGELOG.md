@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3 (Ongoing changes, this branch)
+## 0.3 (Current version)
 ### Added
 * This changelog!
 * Python 3.6 as package dependency.
@@ -11,6 +11,7 @@
 * **Log-Logistic distribution**.
 * **Gumbel distribution**.
 * **Gompertz distribution**.
+* **Degenerate distribution**.
 
 ## 0.2 (12 Nov 2018)
 ### Added
