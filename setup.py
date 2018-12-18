@@ -1,7 +1,11 @@
 from setuptools import setup
+import sys
+
+if sys.version_info < (3, 6):
+    sys.exit("Sorry, this package requires at least Python 3.6")
 
 setup(name="rvpy",
-      version="0.2",
+      version="0.3",
       description="Working with random variables in an OOish way.",
       url="https://github.com/timbook/rvpy",
       author="Tim Book",

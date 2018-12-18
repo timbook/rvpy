@@ -26,7 +26,7 @@ class Laplace(distribution.Distribution):
     * X + c is Laplace
     * cX is Laplace
     """
-    def __init__(self, mu, b):
+    def __init__(self, mu=0, b=1):
         """
         Parameters
         ----------
